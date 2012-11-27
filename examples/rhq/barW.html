@@ -3,7 +3,7 @@
 <head>
     <title>RHQ d3 Chart Tester</title>
     <script src="http://d3js.org/d3.v3.min.js"></script>
-    <style  >
+    <style>
         .axis path,
         .axis line {
             fill: none;
@@ -36,8 +36,8 @@
             xAxisLabel = "Time";
 
     var json = eval([
-        { x:1352204720548, high:0.016642348035599646, low:0.016642348035599646, y:0.016642348035599646},
-        { x:1352211680548, high:12.000200003333388, low:0.0, y:3.500050000833347},
+        { x:1352204720548, high:5.016642348035599646, low:2.016642348035599646, y:2.016642348035599646},
+        { x:1352211680548, high:8.000200003333388, low:2.0, y:3.500050000833347},
         { x:1352211920548, high:2.000033333888898, low:1.999966667222213, y:2.000000000277778},
         { x:1352212160548, high:5.0, low:1.999966667222213, y:2.750000000277778},
         { x:1352212400548, high:4.0, low:2.0, y:2.5000083334722243},
@@ -96,12 +96,12 @@
                 .ticks(5)
                 .orient("left");
 
-//d3.select("y axis").append().text(" Metric Label")
+//        yAxis.append().text(" Metric Label")
 //        .attr("transform", "rotate (90, "+margin.right + ", 0)")
 //        .attr("x",20).attr("y",0);
 
-        var interpolation = "basis";
-        //var interpolation = "step-after";
+       // var interpolation = "basis";
+       var interpolation = "step-before";
 
         var line = d3.svg.line()
                 .interpolate(interpolation)
@@ -136,6 +136,8 @@
                     return yScale(+d.low);
                 });
 
+
+
         var svg = d3.select(chartSelection).append("g")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
@@ -166,6 +168,27 @@
                 .attr("stroke", "steelblue")
                 .attr("stroke-width", "2")
                 .attr("d", line);
+
+        svg.selectAll("rect")
+                .data(data)
+                .enter().append("rect")
+                 .attr("x", function(datum) { return timeScale(datum.x); }).
+                attr("y", function(datum) { return  yScale(datum.y); }).
+                attr("height", function(datum) { return height - yScale( datum.y); }).
+                attr("width", 20).
+                attr("opacity",.3).
+                attr("fill", "red");
+
+//        svg.selectAll("line.stem")
+//                .data(data)
+//                .enter().append("svg:line")
+//                .attr("class", "stem")
+//                .attr("x1", function(d) { return x(d.timestamp) + 0.25 * (width - 2 * margin)/ data.length;})
+//                .attr("x2", function(d) { return x(d.timestamp) + 0.25 * (width - 2 * margin)/ data.length;})
+//                .attr("y1", function(d) { return y(d.High);})
+//                .attr("y2", function(d) { return y(d.Low); })
+//                .attr("stroke", function(d){ return d.Open > d.Close ? "red" : "green"; })
+
 
         svg.append("path")
                 .datum(data)
