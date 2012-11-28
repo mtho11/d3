@@ -69,12 +69,15 @@
                 width = 400 - margin.left - margin.right,
                 height = 150 - margin.top - margin.bottom;
 
-        var timeScale = d3.time.scale()
+        var dateFormat = d3.time.format("%I %p");
+
+        var timeScale = d3.scale.linear()
                 .range([0, width])
                 .domain(d3.extent(data, function (d)
         {
             return d.x;
         }));
+       // timeScale.ticks(d3.time.hours, 1);
 
         var yScale = d3.scale.linear()
                 .rangeRound([height, 0])
@@ -96,9 +99,6 @@
                 .ticks(5)
                 .orient("left");
 
-//        yAxis.append().text(" Metric Label")
-//        .attr("transform", "rotate (90, "+margin.right + ", 0)")
-//        .attr("x",20).attr("y",0);
 
        // var interpolation = "basis";
        var interpolation = "step-before";
@@ -172,16 +172,26 @@
         svg.selectAll("rect")
                 .data(data)
                 .enter().append("rect")
-                 .attr("x", function(datum) { return timeScale(datum.x); }).
-                attr("y", function(datum) { return  yScale(datum.y); }).
-                attr("height", function(datum) { return height - yScale( datum.y); }).
-                attr("width", 20).
-                attr("opacity",.3).
-                attr("fill", "red");
+                .attr("x", function(d) { return width - timeScale(d.x); })
+                .attr("y", function(d) { return yScale(d.y);})
+                .attr("height", function(d) { return height - yScale( d.y);} )
+                .attr("width", function(d) { return  (width/data.length -5); })
+                .attr("fill","red");
+
+
+//        svg.selectAll("rect")
+//                .data(data)
+//                .enter().append("rect")
+//                .attr("x", function(datum) { return width -  timeScale(datum.x); }).
+//                attr("y", function(datum) { return  yScale(datum.y); }).
+//                attr("height", function(datum) { return height - yScale( datum.y); }).
+//                attr("width", width / data.length -1).
+//                attr("opacity",.3).
+//                attr("fill", "red");
 
 //        svg.selectAll("line.stem")
 //                .data(data)
-//                .enter().append("svg:line")
+//                .enter().append("line")
 //                .attr("class", "stem")
 //                .attr("x1", function(d) { return x(d.timestamp) + 0.25 * (width - 2 * margin)/ data.length;})
 //                .attr("x2", function(d) { return x(d.timestamp) + 0.25 * (width - 2 * margin)/ data.length;})
@@ -211,8 +221,7 @@
                 .attr("stroke-opacity", ".3")
                 .attr("d", lowLine);
 
-
-        console.log("finished paths");
+        console.log("finished drawing paths");
     }
     draw(json);
 
