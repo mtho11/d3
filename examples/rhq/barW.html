@@ -18,7 +18,6 @@
 </head>
 <body>
 <span>Chart Tester</span>
-<span></span>
 
 <div>
     <div id="rChart-myChart">
@@ -43,9 +42,9 @@
         { x:1352212400548, high:4.0, low:2.0, y:2.5000083334722243},
         { x:1352212640548, high:2.0, low:1.999966667222213, y:1.9999916668055533},
         { x:1352212880548, high:3.0, low:2.0, y:2.2500083334722243},
-        { x:1352213120548, high:3.000050000833347, low:1.999966667222213, y:2.2500041672916677},
-        { x:1352213360548, high:4.0, low:1.999966667222213, y:2.7499916668055535},
-        { x:1352213600548, high:2.000033333888898, low:1.999966667222213, y:2.000008333750002},
+        { x:1352213120548, high:3.000050000833347, low:2.999966667222213, y:2.2500041672916677},
+        { x:1352213360548, high:6.0, low:1.999966667222213, y:5.0499916668055535},
+        { x:1352213600548, high:7.000033333888898, low:3.999966667222213, y:4.000008333750002},
         { x:1352213840548, high:2.0, low:1.999966667222213, y:1.9999916668055533},
         { x:1352214080548, high:3.0, low:1.999966667222213, y:2.250000000277778},
         { x:1352214320548, high:4.0, low:2.0, y:2.5},
@@ -100,8 +99,17 @@
                 .orient("left");
 
 
-       // var interpolation = "basis";
-       var interpolation = "step-before";
+//        xAxis.selectAll("text.xrule") .data(x.ticks(10))
+//                .enter().append("text")
+//                .attr("class", "xrule")
+//                .attr("x", x)
+//                .attr("y", height - margin)
+//                .attr("dy", 20)
+//                .attr("text-anchor", "middle")
+//                .text(function(d){ var date = new Date(d * 1000);  return (date.getMonth() + 1)+"/"+date.getDate(); });
+
+        var interpolation = "basis";
+       //var interpolation = "step-before";
 
         var line = d3.svg.line()
                 .interpolate(interpolation)
