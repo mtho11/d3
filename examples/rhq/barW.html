@@ -36,7 +36,7 @@ var chartId = "myChart",
 
 var json = eval([
     { x:1352204720548, high:5.016642348035599646, low:2.016642348035599646, y:3.016642348035599646},
-    { x:1352211680548, high:8.000200003333388, low:2.0, y:3.500050000833347},
+    { x:1352211680548, high:8.000200003333388, low:4.0, y:5.500050000833347},
     { x:1352211920548, high:2.000033333888898, low:1.999966667222213, y:2.000000000277778},
     { x:1352212160548, high:5.0, low:1.999966667222213, y:2.750000000277778},
     { x:1352212400548, high:4.0, low:2.0, y:2.5000083334722243},
@@ -187,37 +187,72 @@ function draw(data) {
             .attr("opacity", 0.5)
             .attr("fill", "red");
 
+    var radius = 2;
     var edgeToCenter = 3;
+
     // the high whisker
-    svg.selectAll("circle")
+    svg.selectAll("circle.marker")
             .data(data)
             .enter().append("circle")
+            .attr("class", "marker")
+            .attr("cx", function (d) {
+                return  timeScale(d.x) + edgeToCenter;
+            })
+            .attr("cy", function (d) {
+                return yScale(d.y);
+            })
+            .attr("r", radius)
+            .attr("fill", "none")
+            .attr("stroke", "black")
+            .attr("stroke-width", "2");
+
+
+
+    // the high whisker
+    svg.selectAll("circle.high")
+            .data(data)
+            .enter().append("circle")
+            .attr("class", "high")
             .attr("cx", function (d) {
                 return  timeScale(d.x) + edgeToCenter;
             })
             .attr("cy", function (d) {
                 return yScale(d.high);
             })
-            .attr("r", 2)
+            .attr("r", radius)
             .attr("fill", "none")
             .attr("stroke", "black")
             .attr("stroke-width", "2");
 
+
     // the low whisker
-    svg.selectAll("circle")
+    svg.selectAll("circle.low")
             .data(data)
             .enter().append("circle")
+            .attr("class", "low")
             .attr("cx", function (d) {
                 return timeScale(d.x) + edgeToCenter;
             })
             .attr("cy", function (d) {
                 return yScale(d.low);
             })
-            .attr("r", 2)
+            .attr("r", radius)
             .attr("fill", "none")
-            .attr("stroke", "blue")
+            .attr("stroke", "black")
             .attr("stroke-width", "2");
 
+        svg.selectAll("line.stem")
+                .data(data)
+                .enter().append("line")
+                .attr("class", "stem")
+                .attr("x1", function(d) { return timeScale(d.x) + radius; })
+                .attr("x2", function(d) { return timeScale(d.x) + radius; })
+                .attr("y1", function(d) { return yScale(d.high);})
+                .attr("y2", function(d) { return yScale(d.low); })
+                .attr("stroke-width", "1.5")
+                .attr("stroke-opacity", ".6")
+                .attr("stroke-dasharray", "5,5")
+                .attr("stroke", "black");
 
 //        svg.selectAll("rect")
 //                .data(data)
