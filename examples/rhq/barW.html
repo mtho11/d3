@@ -58,7 +58,46 @@ var json = eval([
     { x:1352216240548, high:2.000066668888963, low:1.999966667222213, y:2.000008334027794},
     { x:1352216480548, high:3.0, low:1.999966667222213, y:2.2499916668055535}
 ]);
-
+var json2 = eval(
+        [
+            { x:1353860526384, high:1.0000333344444814, low:0.005050312475458637, y:0.9751266746243866},
+            { x:1353865926384, high:160.0268171136186, low:0.9999833336111065, y:21.144743338839582},
+            { x:1353871326384, high:149.0, low:0.0, y:5.189418869590717},
+            { x:1353876726384, high:5.000083334722245, low:1.999966667222213, y:2.466857373201945},
+            { x:1353882126384, high:4.9999166680555325, low:1.999866675554963, y:2.411110741376545},
+            { x:1353887526384, high:5.0, low:1.999966667222213, y:2.4111100003456785},
+            { x:1353892926384, high:4.0, low:0.9997334044254865, y:1.1625006269826392},
+            { x:1353898326384, high:24.0, low:0.0, y:5.962227999053264},
+            { x:1353936126384, high:1.000016666944449, low:0.004979783737951828, y:0.9423038932853648},
+            { x:1353941526384, high:40.99323344610923, low:0.0, y:6.099925557049361},
+            { x:1353946926384, high:5.000083334722245, low:2.9999000033332224, y:3.1555537043456754},
+            { x:1353952326384, high:5.000166672222407, low:2.9999500008333193, y:3.166669048134926},
+            { x:1353963126384, high:21.00035000583343, low:0.0, y:3.1876754880905587},
+            { x:1353968526384, high:5.0, low:1.9999333355554816, y:2.1555535190277726},
+            { x:1353973926384, high:5.000083334722245, low:1.9999333355554816, y:2.1666675930154318},
+            { x:1353979326384, high:4.9999166680555325, low:1.999966667222213, y:2.15384551318376},
+            { x:1354022526384, high:5.0, low:0.03840652954895509, y:3.101282440633114},
+            { x:1354027926384, high:5.000083334722245, low:2.9999000033332224, y:3.1444422227654285},
+            { x:1354033326384, high:30.0, low:0.9999666677777408, y:1.5280897005649188},
+            { x:1354038726384, high:1.0000333344444814, low:0.9999833336111065, y:1.0000001853179015},
+            { x:1354044126384, high:1.0000333344444814, low:0.9999666677777408, y:0.9999998149907401},
+            { x:1354049526384, high:1.0000333344444814, low:0.0, y:0.9888890742129631},
+            { x:1354054926384, high:1.0000333344444814, low:0.9999833336111065, y:1.000000000160495},
+            { x:1354060326384, high:1.0000333344444814, low:0.9999833336111065, y:1.000000000135803},
+            { x:1354065726384, high:1.0000333344444814, low:0.9999666677777408, y:1.0000000001872669},
+            { x:1354071126384, high:1.0000333344444814, low:0.07256039846945933, y:0.9784316373545864},
+            { x:1354092726384, high:0.005526877458395394, low:0.005526877458395394, y:0.005526877458395394},
+            { x:1354108926384, high:1.000016666944449, low:0.008148809207719801, y:0.9680053381196023},
+            { x:1354114326384, high:1.0000333344444814, low:0.9999666677777408, y:0.9999998149845675},
+            { x:1354119726384, high:1459.0243170719511, low:0.9999666677777408, y:20.83360259738896},
+            { x:1354125126384, high:83.0, low:0.9999666677777408, y:4.2777905561080285},
+            { x:1354130526384, high:5.000166672222407, low:2.9999000033332224, y:3.1555553709413573},
+            { x:1354135926384, high:5.0, low:2.9999000033332224, y:3.1666659264197516},
+            { x:1354141326384, high:6.924568368571692, low:1.5650268662945381, y:3.194329206807157},
+            { x:1354146726384, high:5.000166672222407, low:2.9999000033332224, y:3.2000016673981477},
+            { x:1354152126384, high:12.0, low:0.9999833336111065, y:3.224718727228463}
+        ]
+);
 
 function draw(data) {
     "use strict";
@@ -92,16 +131,6 @@ function draw(data) {
             .scale(yScale)
             .ticks(5)
             .orient("left");
-
-
-//        xAxis.selectAll("text.xrule") .data(x.ticks(10))
-//                .enter().append("text")
-//                .attr("class", "xrule")
-//                .attr("x", x)
-//                .attr("y", height - margin)
-//                .attr("dy", 20)
-//                .attr("text-anchor", "middle")
-//                .text(function(d){ var date = new Date(d * 1000);  return (date.getMonth() + 1)+"/"+date.getDate(); });
 
     var interpolation = "basis";
     //var interpolation = "step-before";
@@ -207,31 +236,22 @@ function draw(data) {
             .attr("stroke-width", "2");
 
 
-
-    // the high whisker
-//    svg.selectAll("circle.high")
-//            .data(data)
-//            .enter().append("circle")
-//            .attr("class", "high")
-//            .attr("cx", function (d) {
-//                return  timeScale(d.x) + edgeToCenter;
-//            })
-//            .attr("cy", function (d) {
-//                return yScale(d.high);
-//            })
-//            .attr("r", radius)
-//            .attr("fill", "none")
-//            .attr("stroke", "black")
-//            .attr("stroke-width", "2");
-
     svg.selectAll("line.high")
             .data(data)
             .enter().append("line")
             .attr("class", "high")
-            .attr("x1", function(d) { return timeScale(d.x) - edgeToCenter; })
-            .attr("x2", function(d) { return timeScale(d.x) + edgeToCenter; })
-            .attr("y1", function(d) { return yScale(d.high);})
-            .attr("y2", function(d) { return yScale(d.high);})
+            .attr("x1", function (d) {
+                return timeScale(d.x) - edgeToCenter;
+            })
+            .attr("x2", function (d) {
+                return timeScale(d.x) + edgeToCenter;
+            })
+            .attr("y1", function (d) {
+                return yScale(d.high);
+            })
+            .attr("y2", function (d) {
+                return yScale(d.high);
+            })
             .attr("stroke-width", "1.5")
             .attr("stroke-opacity", ".6")
             .attr("stroke", "black");
@@ -240,64 +260,43 @@ function draw(data) {
             .data(data)
             .enter().append("line")
             .attr("class", "low")
-            .attr("x1", function(d) { return timeScale(d.x) - edgeToCenter; })
-            .attr("x2", function(d) { return timeScale(d.x) + edgeToCenter; })
-            .attr("y1", function(d) { return yScale(d.low);})
-            .attr("y2", function(d) { return yScale(d.low);})
+            .attr("x1", function (d) {
+                return timeScale(d.x) - edgeToCenter;
+            })
+            .attr("x2", function (d) {
+                return timeScale(d.x) + edgeToCenter;
+            })
+            .attr("y1", function (d) {
+                return yScale(d.low);
+            })
+            .attr("y2", function (d) {
+                return yScale(d.low);
+            })
             .attr("stroke-width", "1.5")
             .attr("stroke-opacity", ".6")
             .attr("stroke", "black");
 
 
-//    // the low whisker
-//    svg.selectAll("circle.low")
-//            .data(data)
-//            .enter().append("circle")
-//            .attr("class", "low")
-//            .attr("cx", function (d) {
-//                return timeScale(d.x) + edgeToCenter;
-//            })
-//            .attr("cy", function (d) {
-//                return yScale(d.low);
-//            })
-//            .attr("r", radius)
-//            .attr("fill", "none")
-//            .attr("stroke", "black")
-//            .attr("stroke-width", "2");
-
-        svg.selectAll("line.stem")
-                .data(data)
-                .enter().append("line")
-                .attr("class", "stem")
-                .attr("x1", function(d) { return timeScale(d.x) + radius; })
-                .attr("x2", function(d) { return timeScale(d.x) + radius; })
-                .attr("y1", function(d) { return yScale(d.high);})
-                .attr("y2", function(d) { return yScale(d.low); })
-                .attr("stroke-width", "1.5")
-                .attr("stroke-opacity", ".6")
-                .attr("stroke-dasharray", "5,5")
-                .attr("stroke", "black");
-
-//        svg.selectAll("rect")
-//                .data(data)
-//                .enter().append("rect")
-//                .attr("x", function(datum) { return width -  timeScale(datum.x); }).
-//                attr("y", function(datum) { return  yScale(datum.y); }).
-//                attr("height", function(datum) { return height - yScale( datum.y); }).
-//                attr("width", width / data.length -1).
-//                attr("opacity",.3).
-//                attr("fill", "red");
-
-//        svg.selectAll("line.stem")
-//                .data(data)
-//                .enter().append("line")
-//                .attr("class", "stem")
-//                .attr("x1", function(d) { return x(d.timestamp) + 0.25 * (width - 2 * margin)/ data.length;})
-//                .attr("x2", function(d) { return x(d.timestamp) + 0.25 * (width - 2 * margin)/ data.length;})
-//                .attr("y1", function(d) { return y(d.High);})
-//                .attr("y2", function(d) { return y(d.Low); })
-//                .attr("stroke", function(d){ return d.Open > d.Close ? "red" : "green"; })
-
+    svg.selectAll("line.stem")
+            .data(data)
+            .enter().append("line")
+            .attr("class", "stem")
+            .attr("x1", function (d) {
+                return timeScale(d.x) + radius;
+            })
+            .attr("x2", function (d) {
+                return timeScale(d.x) + radius;
+            })
+            .attr("y1", function (d) {
+                return yScale(d.high);
+            })
+            .attr("y2", function (d) {
+                return yScale(d.low);
+            })
+            .attr("stroke-width", "1.5")
+            .attr("stroke-opacity", ".6")
+            .attr("stroke-dasharray", "5,5")
+            .attr("stroke", "black");
 
     svg.append("path")
             .datum(data)
