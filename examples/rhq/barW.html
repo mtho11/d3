@@ -103,9 +103,22 @@ function draw(data) {
     "use strict";
 
     var margin = {top:10, right:5, bottom:30, left:70},
-            width = 400 - margin.left - margin.right,
+            width = 500 - margin.left - margin.right,
             height = 150 - margin.top - margin.bottom;
+
+    var avg = d3.mean(data.map(function (d) {
+        return d.y;
+    }));
+    var peak = d3.max(data.map(function (d) {
+        return d.high;
+    }));
+    var min = d3.min(data.map(function (d) {
+        return d.low;
+    }));
+
+
     var dateFormat = d3.time.format("%I %p");
+
 
     var timeScale = d3.time.scale()
             .range([0, width])
@@ -134,7 +147,22 @@ function draw(data) {
 
     var interpolation = "basis";
     //var interpolation = "step-before";
-
+    var avgLine = d3.svg.line()
+            .interpolate(interpolation)
+            .x(function (d) {
+                return timeScale(d.x);
+            })
+            .y(function (d) {
+                return yScale((avg));
+            });
+    var peakLine = d3.svg.line()
+            .interpolate(interpolation)
+            .x(function (d) {
+                return timeScale(d.x);
+            })
+            .y(function (d) {
+                return yScale((peak));
+            });
     var line = d3.svg.line()
             .interpolate(interpolation)
             .x(function (d) {
@@ -235,16 +263,27 @@ function draw(data) {
             .attr("stroke", "black")
             .attr("stroke-width", "2");
 
+    // peak Line (must be before line.high to look right
+    svg.append("path")
+            .datum(data)
+            .attr("class", "peakLine")
+            .attr("fill", "none")
+            .attr("stroke", "red")
+            .attr("stroke-width", "2")
+            .attr("stroke-dasharray", "5,5")
+        //.attr("stroke-dasharray", "20,10,5,5,5,10")
+            .attr("stroke-opacity", ".6")
+            .attr("d", peakLine);
 
-    svg.selectAll("line.high")
+    svg.selectAll("line.highWhisker")
             .data(data)
             .enter().append("line")
-            .attr("class", "high")
+            .attr("class", "highWhisker")
             .attr("x1", function (d) {
-                return timeScale(d.x)   ;
+                return timeScale(d.x);
             })
             .attr("x2", function (d) {
-                return timeScale(d.x) + ( 4 * edgeToCenter) ;
+                return timeScale(d.x) + ( 4 * edgeToCenter);
             })
             .attr("y1", function (d) {
                 return yScale(d.high);
@@ -256,15 +295,15 @@ function draw(data) {
             .attr("stroke-opacity", ".4")
             .attr("stroke", "black");
 
-    svg.selectAll("line.low")
+    svg.selectAll("line.lowWhisker")
             .data(data)
             .enter().append("line")
-            .attr("class", "low")
+            .attr("class", "lowWhisker")
             .attr("x1", function (d) {
-                return timeScale(d.x) ;
+                return timeScale(d.x);
             })
             .attr("x2", function (d) {
-                return timeScale(d.x) + ( 4 * edgeToCenter) ;
+                return timeScale(d.x) + ( 4 * edgeToCenter);
             })
             .attr("y1", function (d) {
                 return yScale(d.low);
@@ -277,6 +316,7 @@ function draw(data) {
             .attr("stroke", "black");
 
 
+    // Whisker stem
     svg.selectAll("line.stem")
             .data(data)
             .enter().append("line")
@@ -285,7 +325,7 @@ function draw(data) {
                 return timeScale(d.x) + (2 * edgeToCenter);
             })
             .attr("x2", function (d) {
-                return timeScale(d.x) + (2 *  edgeToCenter);
+                return timeScale(d.x) + (2 * edgeToCenter);
             })
             .attr("y1", function (d) {
                 return yScale(d.high);
@@ -298,34 +338,17 @@ function draw(data) {
             .attr("stroke-dasharray", "2,2")
             .attr("stroke", "black");
 
-//    svg.append("path")
-//            .datum(data)
-//            .attr("class", "line")
-//            .attr("fill", "none")
-//            .attr("stroke", "steelblue")
-//            .attr("stroke-width", "2")
-//            .attr("d", line);
-//
-//    svg.append("path")
-//            .datum(data)
-//            .attr("class", "highLine")
-//            .attr("fill", "none")
-//            .attr("stroke", "red")
-//            .attr("stroke-width", "1.5")
-//        //.attr("stroke-dasharray", "20,10,5,5,5,10")
-//            .attr("stroke-dasharray", "5,5")
-//            .attr("stroke-opacity", ".3")
-//            .attr("d", highLine);
-//
-//    svg.append("path")
-//            .datum(data)
-//            .attr("class", "lowLine")
-//            .attr("fill", "none")
-//            .attr("stroke", "blue")
-//            .attr("stroke-width", "1.5")
-//            .attr("stroke-dasharray", "5,5")
-//            .attr("stroke-opacity", ".3")
-//            .attr("d", lowLine);
+
+    svg.append("path")
+            .datum(data)
+            .attr("class", "avgLine")
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", "2")
+            .attr("stroke-dasharray", "5,5")
+            .attr("stroke-opacity", ".6")
+            .attr("d", avgLine);
+
 
     console.log("finished drawing paths");
 }
