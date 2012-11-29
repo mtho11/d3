@@ -128,12 +128,11 @@ function draw(data) {
 
     // adjust the min scale so blue low line is not in axis
     var lowBound = min - ((peak - min)* 0.1);
+    var highBound = peak + ((peak - min)* 0.1);
 
     var yScale = d3.scale.linear()
             .rangeRound([height, 0])
-            .domain([lowBound, d3.max(data.map(function (x) {
-        return x.high;
-    }))]);
+            .domain([lowBound,highBound]);
 
     var xAxis = d3.svg.axis()
             .scale(timeScale)
@@ -227,9 +226,10 @@ function draw(data) {
 
 
     // The bars of the bar graph
-    svg.selectAll("rect")
+    svg.selectAll("rect.bar")
             .data(data)
             .enter().append("rect")
+            .attr("class", "bar")
             .attr("x", function (d) {
                 return timeScale(d.x);
             })
@@ -240,7 +240,7 @@ function draw(data) {
                 return height - yScale(d.y);
             })
             .attr("width", function (d) {
-                return  (width / data.length - 5 );
+                return  (width / data.length -12  );
             })
             .attr("data-rhq-value", function (d) {
                 return d.y;
@@ -255,27 +255,13 @@ function draw(data) {
                 var myDate = new Date(d.x);
                 return myDate.getHours() + ":" + myDate.getMinutes();
             })
-            .attr("opacity", 0.5)
+            .attr("opacity", 0.3)
             .attr("fill", "red");
 
     var radius = 2;
-    var edgeToCenter = 3;
+    var edgeToCenter = 2;
 
-    // the high whisker
-    svg.selectAll("circle.marker")
-            .data(data)
-            .enter().append("circle")
-            .attr("class", "marker")
-            .attr("cx", function (d) {
-                return  timeScale(d.x) + (2 * edgeToCenter);
-            })
-            .attr("cy", function (d) {
-                return yScale(d.y);
-            })
-            .attr("r", radius)
-            .attr("fill", "none")
-            .attr("stroke", "black")
-            .attr("stroke-width", "2");
+
 
     // peak Line (must be before line.high to look right
     svg.append("path")
@@ -284,9 +270,9 @@ function draw(data) {
             .attr("fill", "none")
             .attr("stroke", "red")
             .attr("stroke-width", "2")
-            .attr("stroke-dasharray", "5,5")
+            //.attr("stroke-dasharray", "5,5")
             .attr("stroke-dasharray", "20,10,5,5,5,10")
-            .attr("stroke-opacity", ".4")
+            //.attr("stroke-opacity", ".8")
             .attr("d", peakLine);
 
     // min Line
@@ -300,6 +286,22 @@ function draw(data) {
             .attr("stroke-dasharray", "20,10,5,5,5,10")
             .attr("stroke-opacity", ".6")
             .attr("d", minLine);
+
+    // circle marker
+    svg.selectAll("circle.marker")
+            .data(data)
+            .enter().append("circle")
+            .attr("class", "marker")
+            .attr("cx", function (d) {
+                return  timeScale(d.x) + (2 * edgeToCenter);
+            })
+            .attr("cy", function (d) {
+                return yScale(d.y);
+            })
+            .attr("r", radius)
+            .attr("fill", "none")
+            .attr("stroke", "black")
+            .attr("stroke-width", "1.5");
 
     svg.selectAll("line.highWhisker")
             .data(data)
@@ -318,7 +320,7 @@ function draw(data) {
                 return yScale(d.high);
             })
             .attr("stroke-width", "1")
-            .attr("stroke-opacity", ".4")
+            .attr("stroke-opacity", ".7")
             .attr("stroke", "black");
 
     svg.selectAll("line.lowWhisker")
@@ -338,7 +340,7 @@ function draw(data) {
                 return yScale(d.low);
             })
             .attr("stroke-width", "1")
-            .attr("stroke-opacity", ".4")
+            .attr("stroke-opacity", ".7")
             .attr("stroke", "black");
 
 
