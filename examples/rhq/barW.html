@@ -35,7 +35,7 @@ var chartId = "myChart",
         xAxisLabel = "Time";
 
 var json = eval([
-    { x:1352204720548, high:5.016642348035599646, low:2.016642348035599646, y:3.016642348035599646},
+    { x:1352204720548, high:5.016642348035599646, low:3.016642348035599646, y:4.016642348035599646},
     { x:1352211680548, high:8.000200003333388, low:4.0, y:5.500050000833347},
     { x:1352211920548, high:2.000033333888898, low:1.999966667222213, y:2.000000000277778},
     { x:1352212160548, high:5.0, low:1.999966667222213, y:2.750000000277778},
@@ -225,7 +225,7 @@ function draw(data) {
             .enter().append("circle")
             .attr("class", "marker")
             .attr("cx", function (d) {
-                return  timeScale(d.x) + edgeToCenter;
+                return  timeScale(d.x) + (2 * edgeToCenter);
             })
             .attr("cy", function (d) {
                 return yScale(d.y);
@@ -241,10 +241,10 @@ function draw(data) {
             .enter().append("line")
             .attr("class", "high")
             .attr("x1", function (d) {
-                return timeScale(d.x) - edgeToCenter;
+                return timeScale(d.x)   ;
             })
             .attr("x2", function (d) {
-                return timeScale(d.x) + edgeToCenter;
+                return timeScale(d.x) + ( 4 * edgeToCenter) ;
             })
             .attr("y1", function (d) {
                 return yScale(d.high);
@@ -252,8 +252,8 @@ function draw(data) {
             .attr("y2", function (d) {
                 return yScale(d.high);
             })
-            .attr("stroke-width", "1.5")
-            .attr("stroke-opacity", ".6")
+            .attr("stroke-width", "1")
+            .attr("stroke-opacity", ".4")
             .attr("stroke", "black");
 
     svg.selectAll("line.low")
@@ -261,10 +261,10 @@ function draw(data) {
             .enter().append("line")
             .attr("class", "low")
             .attr("x1", function (d) {
-                return timeScale(d.x) - edgeToCenter;
+                return timeScale(d.x) ;
             })
             .attr("x2", function (d) {
-                return timeScale(d.x) + edgeToCenter;
+                return timeScale(d.x) + ( 4 * edgeToCenter) ;
             })
             .attr("y1", function (d) {
                 return yScale(d.low);
@@ -272,8 +272,8 @@ function draw(data) {
             .attr("y2", function (d) {
                 return yScale(d.low);
             })
-            .attr("stroke-width", "1.5")
-            .attr("stroke-opacity", ".6")
+            .attr("stroke-width", "1")
+            .attr("stroke-opacity", ".4")
             .attr("stroke", "black");
 
 
@@ -282,10 +282,10 @@ function draw(data) {
             .enter().append("line")
             .attr("class", "stem")
             .attr("x1", function (d) {
-                return timeScale(d.x) + radius;
+                return timeScale(d.x) + (2 * edgeToCenter);
             })
             .attr("x2", function (d) {
-                return timeScale(d.x) + radius;
+                return timeScale(d.x) + (2 *  edgeToCenter);
             })
             .attr("y1", function (d) {
                 return yScale(d.high);
@@ -295,37 +295,37 @@ function draw(data) {
             })
             .attr("stroke-width", "1.5")
             .attr("stroke-opacity", ".6")
-            .attr("stroke-dasharray", "5,5")
+            .attr("stroke-dasharray", "2,2")
             .attr("stroke", "black");
 
-    svg.append("path")
-            .datum(data)
-            .attr("class", "line")
-            .attr("fill", "none")
-            .attr("stroke", "steelblue")
-            .attr("stroke-width", "2")
-            .attr("d", line);
-
-    svg.append("path")
-            .datum(data)
-            .attr("class", "highLine")
-            .attr("fill", "none")
-            .attr("stroke", "red")
-            .attr("stroke-width", "1.5")
-        //.attr("stroke-dasharray", "20,10,5,5,5,10")
-            .attr("stroke-dasharray", "5,5")
-            .attr("stroke-opacity", ".3")
-            .attr("d", highLine);
-
-    svg.append("path")
-            .datum(data)
-            .attr("class", "lowLine")
-            .attr("fill", "none")
-            .attr("stroke", "blue")
-            .attr("stroke-width", "1.5")
-            .attr("stroke-dasharray", "5,5")
-            .attr("stroke-opacity", ".3")
-            .attr("d", lowLine);
+//    svg.append("path")
+//            .datum(data)
+//            .attr("class", "line")
+//            .attr("fill", "none")
+//            .attr("stroke", "steelblue")
+//            .attr("stroke-width", "2")
+//            .attr("d", line);
+//
+//    svg.append("path")
+//            .datum(data)
+//            .attr("class", "highLine")
+//            .attr("fill", "none")
+//            .attr("stroke", "red")
+//            .attr("stroke-width", "1.5")
+//        //.attr("stroke-dasharray", "20,10,5,5,5,10")
+//            .attr("stroke-dasharray", "5,5")
+//            .attr("stroke-opacity", ".3")
+//            .attr("d", highLine);
+//
+//    svg.append("path")
+//            .datum(data)
+//            .attr("class", "lowLine")
+//            .attr("fill", "none")
+//            .attr("stroke", "blue")
+//            .attr("stroke-width", "1.5")
+//            .attr("stroke-dasharray", "5,5")
+//            .attr("stroke-opacity", ".3")
+//            .attr("d", lowLine);
 
     console.log("finished drawing paths");
 }
