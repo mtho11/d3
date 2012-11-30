@@ -154,7 +154,6 @@ function draw(data) {
             .orient("left");
 
     var interpolation = "basis";
-    //var interpolation = "step-before";
     var avgLine = d3.svg.line()
             .interpolate(interpolation)
             .x(function (d) {
@@ -247,40 +246,75 @@ function draw(data) {
 
 
     // The bars of the bar graph
-    svg.selectAll("rect.bar")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "bar")
-            .attr("x", function (d) {
-                return timeScale(d.x);
-            })
-            .attr("y", function (d) {
-                return yScale(d.y);
-            })
-            .attr("height", function (d) {
-                return height - yScale(d.y);
-            })
-            .attr("width", function (d) {
-                return  (width / data.length -12  );
-            })
-            .attr("data-rhq-value", function (d) {
-                return d.y;
-            })
-            .attr("data-rhq-high-value", function (d) {
-                return d.high;
-            })
-            .attr("data-rhq-low-value", function (d) {
-                return d.low;
-            })
-            .attr("data-rhq-time", function (d) {
-                var myDate = new Date(d.x);
-                return myDate.getHours() + ":" + myDate.getMinutes();
-            })
-            //.attr("opacity", 0.3)
-            .attr("fill", "url(#gradBar)");
+//    svg.selectAll("rect.bar")
+//            .data(data)
+//            .enter().append("rect")
+//            .attr("class", "bar")
+//            .attr("x", function (d) {
+//                return timeScale(d.x);
+//            })
+//            .attr("y", function (d) {
+//                return yScale(d.y);
+//            })
+//            .attr("height", function (d) {
+//                return height - yScale(d.y);
+//            })
+//            .attr("width", function (d) {
+//                return  (width / data.length -12  );
+//            })
+//            .attr("data-rhq-value", function (d) {
+//                return d.y;
+//            })
+//            .attr("data-rhq-high-value", function (d) {
+//                return d.high;
+//            })
+//            .attr("data-rhq-low-value", function (d) {
+//                return d.low;
+//            })
+//            .attr("data-rhq-time", function (d) {
+//                var myDate = new Date(d.x);
+//                return myDate.getHours() + ":" + myDate.getMinutes();
+//            })
+//            //.attr("opacity", 0.3)
+//            .attr("fill", "url(#gradBar)");
 
     var radius = 2;
     var edgeToCenter = 2;
+
+
+    // The bars of the bar graph
+//    svg.selectAll("rect.candle")
+//            .data(data)
+//            .enter().append("rect")
+//            .attr("class", "candle")
+//            .attr("x", function (d) {
+//                return timeScale(d.x);
+//            })
+//            .attr("y", function (d) {
+//                return yScale(d.low);
+//            })
+//            .attr("height", function (d) {
+//                //@fixme
+//                return   yScale(d.low) - yScale(1);
+//            })
+//            .attr("width", function (d) {
+//                return  (width / data.length -12  );
+//            })
+//            .attr("data-rhq-value", function (d) {
+//                return d.y;
+//            })
+//            .attr("data-rhq-high-value", function (d) {
+//                return d.high;
+//            })
+//            .attr("data-rhq-low-value", function (d) {
+//                return d.low;
+//            })
+//            .attr("data-rhq-time", function (d) {
+//                var myDate = new Date(d.x);
+//                return myDate.getHours() + ":" + myDate.getMinutes();
+//            })
+//            .attr("opacity", 0.6)
+//            .attr("fill", "#cccccc");
 
 
 
@@ -309,20 +343,39 @@ function draw(data) {
             .attr("d", minLine);
 
     // circle marker
-    svg.selectAll("circle.marker")
+//    svg.selectAll("circle.marker")
+//            .data(data)
+//            .enter().append("circle")
+//            .attr("class", "marker")
+//            .attr("cx", function (d) {
+//                return  timeScale(d.x) + (2 * edgeToCenter);
+//            })
+//            .attr("cy", function (d) {
+//                return yScale(d.y);
+//            })
+//            .attr("r", radius)
+//            .attr("fill", "none")
+//            .attr("stroke", "black")
+//            .attr("stroke-width", "1.5");
+    svg.selectAll("line.middleWhisker")
             .data(data)
-            .enter().append("circle")
-            .attr("class", "marker")
-            .attr("cx", function (d) {
-                return  timeScale(d.x) + (2 * edgeToCenter);
+            .enter().append("line")
+            .attr("class", "middleWhisker")
+            .attr("x1", function (d) {
+                return timeScale(d.x);
             })
-            .attr("cy", function (d) {
+            .attr("x2", function (d) {
+                return timeScale(d.x) + ( 4 * edgeToCenter);
+            })
+            .attr("y1", function (d) {
                 return yScale(d.y);
             })
-            .attr("r", radius)
-            .attr("fill", "none")
-            .attr("stroke", "black")
-            .attr("stroke-width", "1.5");
+            .attr("y2", function (d) {
+                return yScale(d.y);
+            })
+            .attr("stroke-width", "2")
+            .attr("stroke-opacity", ".5")
+            .attr("stroke", "black");
 
     svg.selectAll("line.highWhisker")
             .data(data)
@@ -342,7 +395,7 @@ function draw(data) {
             })
             .attr("stroke-width", "1")
             .attr("stroke-opacity", ".7")
-            .attr("stroke", "black");
+            .attr("stroke", "magenta");
 
     svg.selectAll("line.lowWhisker")
             .data(data)
@@ -362,7 +415,7 @@ function draw(data) {
             })
             .attr("stroke-width", "1")
             .attr("stroke-opacity", ".7")
-            .attr("stroke", "black");
+            .attr("stroke", "magenta");
 
 
     // Whisker stem
@@ -377,15 +430,37 @@ function draw(data) {
                 return timeScale(d.x) + (2 * edgeToCenter);
             })
             .attr("y1", function (d) {
-                return yScale(d.high);
+                return yScale(d.high) -2;
             })
             .attr("y2", function (d) {
-                return yScale(d.low);
+                return yScale(d.low) +2;
             })
-            .attr("stroke-width", "1.5")
+            .attr("stroke-width", "3")
+            .attr("stroke-opacity", ".7")
+            //.attr("stroke-dasharray", "2,2")
+            .attr("stroke", "magenta");
+
+
+    svg.selectAll("line.base.stem")
+            .data(data)
+            .enter().append("line")
+            .attr("class", "base.stem")
+            .attr("x1", function (d) {
+                return timeScale(d.x) + (2 * edgeToCenter);
+            })
+            .attr("x2", function (d) {
+                return timeScale(d.x) + (2 * edgeToCenter);
+            })
+            .attr("y1", function (d) {
+                return yScale(d.low) +2;
+            })
+            .attr("y2", function (d) {
+                return height ;
+            })
+            .attr("stroke-width", "1")
             .attr("stroke-opacity", ".6")
-            .attr("stroke-dasharray", "2,2")
-            .attr("stroke", "black");
+            .attr("stroke", "#cccccc");
+
 
 
     svg.append("path")
