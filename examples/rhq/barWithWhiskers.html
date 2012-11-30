@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RHQ d3 Chart Tester</title>
+    <title>RHQ d3 Bar with Whiskers Chart Tester</title>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <style>
         .axis path,
@@ -115,10 +115,6 @@ function draw(data) {
     var min = d3.min(data.map(function (d) {
         return d.low;
     }));
-
-
-    var dateFormat = d3.time.format("%I %p");
-
 
     var timeScale = d3.time.scale()
             .range([0, width])
@@ -282,7 +278,7 @@ function draw(data) {
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-width", "2")
-            .attr("stroke-dasharray", "5,5")
+            //.attr("stroke-dasharray", "5,5")
             .attr("stroke-dasharray", "20,10,5,5,5,10")
             .attr("stroke-opacity", ".6")
             .attr("d", minLine);
@@ -378,25 +374,38 @@ function draw(data) {
             .attr("d", avgLine);
 
     svg.selectAll("circle.marker")
-            .on("mouseover.tooltip", function (d) {
-                d3.select("text#" + d.x).remove();
-                d3.select(chartHandle)
-                        .append("text")
-                        .text("Value: " + d.y)
-                        .attr("x", timeScale(d.x) + 10)
-                        .attr("y", yScale(d.y) - 10)
-                        .attr("id", d.x);
+            .on("mouseover", function (d) {
+                d3.select(this)
+                        .transition()
+                        .attr("r",5);
+            });
+    svg.selectAll("circle.marker")
+            .on("mouseout", function (d) {
+                d3.select(this)
+                        .transition()
+                        .attr("r",radius);
             });
 
-    svg.selectAll("circle.marker")
-            .on("mouseout.tooltip", function (d) {
-                d3.select("text#" + d.x)
-                        .transition()
-                        .duration(500)
-                        .style("opacity", 0)
-                        .style("transform", "translate(10, -10)")
-                        .remove();
-            });
+//    svg.selectAll("circle.marker")
+//            .on("mouseover", function (d) {
+//                d3.select("text#" + d.x).remove();
+//                d3.select(chartHandle)
+//                        .append("text")
+//                        .text("Value: " + d.y)
+//                        .attr("x", timeScale(d.x) + 10)
+//                        .attr("y", yScale(d.y) - 10)
+//                        .attr("id", d.x);
+//            });
+//
+//    svg.selectAll("circle.marker")
+//            .on("mouseout", function (d) {
+//                d3.select("text#" + d.x)
+//                        .transition()
+//                        .duration(500)
+//                        .style("opacity", 0)
+//                        .style("transform", "translate(10, -10)")
+//                        .remove();
+//            });
 
 
     console.log("finished drawing paths");
