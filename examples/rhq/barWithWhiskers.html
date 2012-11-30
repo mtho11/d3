@@ -21,12 +21,20 @@
 
 <div>
     <div id="rChart-myChart">
-        <svg><defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style="stop-color:rgb(249,254,140);stop-opacity:1" />
-                <stop offset="100%" style="stop-color:rgb(253,133,16);stop-opacity:1" />
+        <svg>
+            <defs>
+            <linearGradient id="gradBackground" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:rgb(204,204,204);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
             </linearGradient>
-        </defs></svg>
+        </defs>
+            <defs>
+                <linearGradient id="gradBar" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgb(249,254,140);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgb(253,133,16);stop-opacity:1" />
+                </linearGradient>
+            </defs>
+        </svg>
     </div>
 </div>
 
@@ -200,7 +208,19 @@ function draw(data) {
 
 
     // create the actual chart group
-    var svg = d3.select(chartSelection).append("g")
+    var start = d3.select(chartSelection);
+
+    // add the gradient background
+    start.append("rect")
+            .attr("class", "frame")
+            .attr("x", margin.left)
+            .attr("y", margin.top)
+            .attr("height", height)
+            .attr("width", width+10)
+            .attr("fill", "url(#gradBackground)");
+
+
+    var svg = start.append("g")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -257,7 +277,7 @@ function draw(data) {
                 return myDate.getHours() + ":" + myDate.getMinutes();
             })
             //.attr("opacity", 0.3)
-            .attr("fill", "url(#grad1)");
+            .attr("fill", "url(#gradBar)");
 
     var radius = 2;
     var edgeToCenter = 2;
