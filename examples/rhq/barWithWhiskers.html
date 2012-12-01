@@ -456,9 +456,13 @@ function draw(data) {
             .attr("y2", function (d) {
                 return height ;
             })
-            .attr("stroke-width", "1")
-            .attr("stroke-opacity", ".6")
-            .attr("stroke", "#cccccc");
+            .attr("stroke-opacity", function (d,i) {
+                return i % 5 == 0 ? 1 : .6;
+            })
+            .attr("stroke", function (d,i) {
+                return i % 5 == 0 ? "#919191" : "#cccccc";
+            })
+            .attr("stroke-width", "1");
 
 
 
