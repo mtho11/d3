@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RHQ d3 Bar with Whiskers Chart Tester</title>
+    <title>New RHQ d3 Bar/Area Chart Tester</title>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <style>
         .axis path,
@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-<span>Chart Tester</span>
+<span>New Area/Bar Chart Tester</span>
 
 <div>
     <div id="rChart-myChart">
@@ -205,13 +205,21 @@ function draw(data) {
                 return yScale(+d.low);
             });
 
+    var areaHigh = d3.svg.area()
+            .x(function(d) { return timeScale(d.x); })
+            .y0(function(d) { return yScale(+d.y); })
+            .y1(function(d) { return yScale(+d.high); });
 
+    var areaLow = d3.svg.area()
+            .x(function(d) { return timeScale(d.x); })
+            .y0(function(d) { return yScale(+d.low); })
+            .y1(function(d) { return yScale(+d.y); });
 
     // create the actual chart group
-    var start = d3.select(chartSelection);
+    var chart = d3.select(chartSelection);
 
     // add the gradient background
-    start.append("rect")
+    chart.append("rect")
             .attr("class", "frame")
             .attr("x", margin.left)
             .attr("y", margin.top)
@@ -220,10 +228,33 @@ function draw(data) {
             .attr("fill", "url(#gradBackground)");
 
 
-    var svg = start.append("g")
+
+
+    var svg = chart.append("g")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.append("path")
+            .datum(data)
+            .attr("class", "areaHigh")
+            .attr("fill", "#41cdfb")
+            .attr("opacity", ".4")
+            .attr("stroke", "black")
+            .attr("stroke-width", ".5")
+            .attr("stroke-opacity", ".6")
+            .attr("d", areaHigh);
+
+    svg.append("path")
+            .datum(data)
+            .attr("class", "areaLow")
+            .attr("opacity", ".4")
+            .attr("fill", "#075ef4")
+            .attr("stroke", "black")
+            .attr("stroke-width", ".5")
+            .attr("stroke-opacity", ".6")
+            .attr("d", areaLow);
+
 
     // create x-axis
     svg.append("g")
