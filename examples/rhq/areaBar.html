@@ -146,6 +146,7 @@ function draw(data) {
     var xAxis = d3.svg.axis()
             .scale(timeScale)
             .ticks(5)
+            .tickSubdivide(5)
             .orient("bottom");
 
     var yAxis = d3.svg.axis()
@@ -206,6 +207,7 @@ function draw(data) {
             });
 
     var areaHigh = d3.svg.area()
+            .defined(function(d) { return !isNaN(d.y); })
             .x(function(d) { return timeScale(d.x); })
             .y0(function(d) { return yScale(+d.y); })
             .y1(function(d) { return yScale(+d.high); });
