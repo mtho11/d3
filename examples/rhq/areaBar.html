@@ -341,6 +341,40 @@ function draw(data) {
             .attr("fill", "#42aadf");
 
 
+    var valueBarThickness = 2;
+
+    svg.selectAll("rect.value")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "value")
+            .attr("x", function (d) {
+                return timeScale(d.x);
+            })
+            .attr("y", function (d) {
+                return yScale(d.y) - valueBarThickness;
+            })
+            .attr("height", function (d) {
+                return   yScale(d.y) - yScale(d.y) +valueBarThickness;
+            })
+            .attr("width", function (d) {
+                return  (width / data.length - barOffset );
+            })
+            .attr("data-rhq-value", function (d) {
+                return d.y;
+            })
+            .attr("data-rhq-high-value", function (d) {
+                return d.high;
+            })
+            .attr("data-rhq-low-value", function (d) {
+                return d.low;
+            })
+            .attr("data-rhq-time", function (d) {
+                var myDate = new Date(d.x);
+                return myDate.getHours() + ":" + myDate.getMinutes();
+            })
+            .attr("opacity", 0.8)
+            .attr("fill", "black");
+
 //    svg.append("path")
 //            .datum(data)
 //            .attr("class", "areaHigh")
@@ -377,6 +411,7 @@ function draw(data) {
             .attr("transform", "rotate(-90)")
             .attr("y", -60)
             .attr("dy", ".71em")
+            .attr("font-size", "10px")
             .style("text-anchor", "end")
             .text(yAxisUnits === "NONE" ? "" : yAxisUnits);
 
