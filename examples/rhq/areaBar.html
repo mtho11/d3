@@ -29,8 +29,8 @@
         <svg>
             <defs>
             <linearGradient id="gradBackground" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style="stop-color:rgb(204,204,204);stop-opacity:1" />
-                <stop offset="100%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
+                <stop offset="0%" style="stop-color:rgb(74,74,74);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgb(118,118,118);stop-opacity:1" />
             </linearGradient>
         </defs>
          <defs>
@@ -220,19 +220,20 @@ function draw(data) {
     // create the actual chart group
     var chart = d3.select(chartSelection);
 
+    var titleHeight = 43;
     // add the gradient background
-//    chart.append("rect")
-//            .attr("class", "frame")
-//            .attr("x", margin.left)
-//            .attr("y", margin.top)
-//            .attr("height", height)
-//            .attr("width", width+10)
-//            .attr("fill", "url(#gradBackground)");
+    chart.append("rect")
+            .attr("class", "title")
+            .attr("x", margin.left)
+            .attr("y", margin.top)
+            .attr("height", titleHeight)
+            .attr("width", width+10)
+            .attr("fill", "url(#gradBackground)");
 
     var svg = chart.append("g")
             .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            .attr("height", height + margin.top - titleHeight + margin.bottom)
+            .attr("transform", "translate(" + margin.left + "," + (+titleHeight +margin.top) + ")");
 
     var barOffset = 17;
 
