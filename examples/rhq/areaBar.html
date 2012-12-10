@@ -184,14 +184,14 @@ function draw(data) {
             .y(function (d) {
                 return yScale((min));
             });
-    var line = d3.svg.line()
-            .interpolate("linear")
-            .x(function (d) {
-                return timeScale(d.x);
-            })
-            .y(function (d) {
-                return yScale((+d.y));
-            });
+//    var line = d3.svg.line()
+//            .interpolate("linear")
+//            .x(function (d) {
+//                return timeScale(d.x);
+//            })
+//            .y(function (d) {
+//                return yScale((+d.y));
+//            });
 
     var highLine = d3.svg.line()
             .interpolate(interpolation)
@@ -211,16 +211,17 @@ function draw(data) {
                 return yScale(+d.low);
             });
 
-    var areaHigh = d3.svg.area()
-            .defined(function(d) { return !isNaN(d.y); })
-            .x(function(d) { return timeScale(d.x); })
-            .y0(function(d) { return yScale(+d.y); })
-            .y1(function(d) { return yScale(+d.high); });
-
-    var areaLow = d3.svg.area()
-            .x(function(d) { return timeScale(d.x); })
-            .y0(function(d) { return yScale(+d.low); })
-            .y1(function(d) { return yScale(+d.y); });
+//    var areaHigh = d3.svg.area()
+//            .defined(function(d) {
+//                return !isNaN(d.y); })
+//            .x(function(d) { return timeScale(d.x); })
+//            .y0(function(d) { return yScale(+d.y); })
+//            .y1(function(d) { return yScale(+d.high); });
+//
+//    var areaLow = d3.svg.area()
+//            .x(function(d) { return timeScale(d.x); })
+//            .y0(function(d) { return yScale(+d.low); })
+//            .y1(function(d) { return yScale(+d.y); });
 
     // create the actual chart group
     var chart = d3.select(chartSelection);
@@ -239,6 +240,8 @@ function draw(data) {
             .attr("height", height + margin.top + margin.bottom)
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    var barOffset = 15;
+
     // The bars of the bar graph
     svg.selectAll("rect.bar")
             .data(data)
@@ -254,7 +257,7 @@ function draw(data) {
                 return height - yScale(d.high);
             })
             .attr("width", function (d) {
-                return  (width / data.length -12  );
+                return  (width / data.length - barOffset  );
             })
             .attr("data-rhq-value", function (d) {
                 return d.y;
@@ -269,29 +272,94 @@ function draw(data) {
                 var myDate = new Date(d.x);
                 return myDate.getHours() + ":" + myDate.getMinutes();
             })
-        //.attr("opacity", 0.3)
+        .attr("opacity", 0.7)
             .attr("fill", "#dadde0");
 
 
-    svg.append("path")
-            .datum(data)
-            .attr("class", "areaHigh")
-            .attr("fill", "#41cdfb")
-            .attr("opacity", ".4")
-            .attr("stroke", "black")
-            .attr("stroke-width", ".5")
-            .attr("stroke-opacity", ".6")
-            .attr("d", areaHigh);
+    svg.selectAll("rect.high")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "high")
+            .attr("x", function (d) {
+                return timeScale(d.x);
+            })
+            .attr("y", function (d) {
+                return yScale(d.high);
+            })
+            .attr("height", function (d) {
+                return  yScale(d.y) - yScale(d.high);
+            })
+            .attr("width", function (d) {
+                return  (width / data.length -barOffset  );
+            })
+            .attr("data-rhq-value", function (d) {
+                return d.y;
+            })
+            .attr("data-rhq-high-value", function (d) {
+                return d.high;
+            })
+            .attr("data-rhq-low-value", function (d) {
+                return d.low;
+            })
+            .attr("data-rhq-time", function (d) {
+                var myDate = new Date(d.x);
+                return myDate.getHours() + ":" + myDate.getMinutes();
+            })
+            .attr("opacity", 0.8)
+            .attr("fill", "#084581");
 
-    svg.append("path")
-            .datum(data)
-            .attr("class", "areaLow")
-            .attr("opacity", ".4")
-            .attr("fill", "#075ef4")
-            .attr("stroke", "black")
-            .attr("stroke-width", ".5")
-            .attr("stroke-opacity", ".6")
-            .attr("d", areaLow);
+    svg.selectAll("rect.low")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "low")
+            .attr("x", function (d) {
+                return timeScale(d.x);
+            })
+            .attr("y", function (d) {
+                return yScale(d.y);
+            })
+            .attr("height", function (d) {
+                return  yScale(d.low) - yScale(d.y);
+            })
+            .attr("width", function (d) {
+                return  (width / data.length - barOffset );
+            })
+            .attr("data-rhq-value", function (d) {
+                return d.y;
+            })
+            .attr("data-rhq-high-value", function (d) {
+                return d.high;
+            })
+            .attr("data-rhq-low-value", function (d) {
+                return d.low;
+            })
+            .attr("data-rhq-time", function (d) {
+                var myDate = new Date(d.x);
+                return myDate.getHours() + ":" + myDate.getMinutes();
+            })
+            .attr("opacity", 0.8)
+            .attr("fill", "#42aadf");
+
+
+//    svg.append("path")
+//            .datum(data)
+//            .attr("class", "areaHigh")
+//            .attr("fill", "#41cdfb")
+//            .attr("opacity", ".4")
+//            .attr("stroke", "black")
+//            .attr("stroke-width", ".5")
+//            .attr("stroke-opacity", ".6")
+//            .attr("d", areaHigh);
+//
+//    svg.append("path")
+//            .datum(data)
+//            .attr("class", "areaLow")
+//            .attr("opacity", ".4")
+//            .attr("fill", "#075ef4")
+//            .attr("stroke", "black")
+//            .attr("stroke-width", ".5")
+//            .attr("stroke-opacity", ".6")
+//            .attr("d", areaLow);
 
 
     // create x-axis
@@ -390,14 +458,14 @@ function draw(data) {
             .attr("stroke-opacity", ".6")
             .attr("d", avgLine);
 
-    svg.append("path")
-            .datum(data)
-            .attr("class", "yLine")
-            .attr("fill", "none")
-            .attr("stroke", "black")
-            .attr("stroke-width", "2")
-            .attr("stroke-opacity", ".6")
-            .attr("d", line);
+//    svg.append("path")
+//            .datum(data)
+//            .attr("class", "yLine")
+//            .attr("fill", "none")
+//            .attr("stroke", "black")
+//            .attr("stroke-width", "2")
+//            .attr("stroke-opacity", ".6")
+//            .attr("d", line);
 
 
 //    svg.selectAll("line.middleWhisker")
