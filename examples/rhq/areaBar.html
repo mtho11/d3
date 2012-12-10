@@ -221,6 +221,7 @@ function draw(data) {
     var chart = d3.select(chartSelection);
 
     var titleHeight = 43;
+    var titleSpace = 10;
     // add the gradient background
     chart.append("rect")
             .attr("class", "title")
@@ -232,8 +233,8 @@ function draw(data) {
 
     var svg = chart.append("g")
             .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top - titleHeight + margin.bottom)
-            .attr("transform", "translate(" + margin.left + "," + (+titleHeight +margin.top) + ")");
+            .attr("height", height + margin.top - titleHeight - titleSpace + margin.bottom)
+            .attr("transform", "translate(" + margin.left + "," + (+titleHeight + titleSpace +margin.top) + ")");
 
     var barOffset = 17;
 
