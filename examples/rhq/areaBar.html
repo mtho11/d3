@@ -240,13 +240,13 @@ function draw(data) {
             .attr("height", height + margin.top + margin.bottom)
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var barOffset = 15;
+    var barOffset = 17;
 
     // The bars of the bar graph
-    svg.selectAll("rect.bar")
+    svg.selectAll("rect.grayBar")
             .data(data)
             .enter().append("rect")
-            .attr("class", "bar")
+            .attr("class", "grayBar")
             .attr("x", function (d) {
                 return timeScale(d.x);
             })
@@ -272,7 +272,7 @@ function draw(data) {
                 var myDate = new Date(d.x);
                 return myDate.getHours() + ":" + myDate.getMinutes();
             })
-        .attr("opacity", 0.7)
+        .attr("opacity", 0.55)
             .attr("fill", "#dadde0");
 
 
@@ -340,6 +340,26 @@ function draw(data) {
             .attr("opacity", 0.8)
             .attr("fill", "#42aadf");
 
+    svg.selectAll("rect.outline")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "outline")
+            .attr("x", function (d) {
+                return timeScale(d.x);
+            })
+            .attr("y", function (d) {
+                return yScale(d.high);
+            })
+            .attr("height", function (d) {
+                return  yScale(d.low) - yScale(d.high);
+            })
+            .attr("width", function (d) {
+                return  (width / data.length - barOffset );
+            })
+            .attr("opacity", 0.8)
+            .attr("stroke-width", 0.5)
+            .attr("stroke", "black")
+            .attr("fill", "none");
 
     var valueBarThickness = 2;
 
@@ -354,7 +374,7 @@ function draw(data) {
                 return yScale(d.y) - valueBarThickness;
             })
             .attr("height", function (d) {
-                return   yScale(d.y) - yScale(d.y) +valueBarThickness;
+                return   yScale(d.y) - yScale(d.y) + valueBarThickness;
             })
             .attr("width", function (d) {
                 return  (width / data.length - barOffset );
