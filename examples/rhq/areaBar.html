@@ -41,14 +41,14 @@
             </defs>
             <defs>
                 <linearGradient id="topBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:rgb(249,254,140);stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:rgb(253,133,16);stop-opacity:1" />
+                    <stop offset="0%" style="stop-color:rgb(13,48,141);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgb(19,87,140);stop-opacity:.8" />
                 </linearGradient>
             </defs>
             <defs>
                 <linearGradient id="bottomBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:rgb(249,254,140);stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:rgb(253,133,16);stop-opacity:1" />
+                    <stop offset="0%" style="stop-color:rgb(47,131,173);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgb(46,172,218);stop-opacity:.3" />
                 </linearGradient>
             </defs>
         </svg>
@@ -318,7 +318,9 @@ function draw(data) {
                 return myDate.getHours() + ":" + myDate.getMinutes();
             })
             .attr("opacity", 0.8)
-            .attr("fill", "#084581");
+            //.attr("fill", "#084581");
+            .attr("fill", "url(#topBarGrad)");
+
 
     svg.selectAll("rect.low")
             .data(data)
@@ -350,7 +352,8 @@ function draw(data) {
                 return myDate.getHours() + ":" + myDate.getMinutes();
             })
             .attr("opacity", 0.8)
-            .attr("fill", "#42aadf");
+            //.attr("fill", "#42aadf");
+           .attr("fill", "url(#bottomBarGrad)");
 
     svg.selectAll("rect.outline")
             .data(data)
