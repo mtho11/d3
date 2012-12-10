@@ -33,13 +33,7 @@
                 <stop offset="100%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
             </linearGradient>
         </defs>
-            <defs>
-                <linearGradient id="gradBar" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:rgb(249,254,140);stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:rgb(253,133,16);stop-opacity:1" />
-                </linearGradient>
-            </defs>
-            <defs>
+         <defs>
                 <linearGradient id="topBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" style="stop-color:rgb(13,48,141);stop-opacity:1" />
                     <stop offset="100%" style="stop-color:rgb(19,87,140);stop-opacity:.8" />
@@ -196,14 +190,7 @@ function draw(data) {
             .y(function (d) {
                 return yScale((min));
             });
-//    var line = d3.svg.line()
-//            .interpolate("linear")
-//            .x(function (d) {
-//                return timeScale(d.x);
-//            })
-//            .y(function (d) {
-//                return yScale((+d.y));
-//            });
+
 
     var highLine = d3.svg.line()
             .interpolate(interpolation)
@@ -229,11 +216,6 @@ function draw(data) {
 //            .x(function(d) { return timeScale(d.x); })
 //            .y0(function(d) { return yScale(+d.y); })
 //            .y1(function(d) { return yScale(+d.high); });
-//
-//    var areaLow = d3.svg.area()
-//            .x(function(d) { return timeScale(d.x); })
-//            .y0(function(d) { return yScale(+d.low); })
-//            .y1(function(d) { return yScale(+d.y); });
 
     // create the actual chart group
     var chart = d3.select(chartSelection);
@@ -410,26 +392,6 @@ function draw(data) {
             .attr("opacity", 0.8)
             .attr("fill", "black");
 
-//    svg.append("path")
-//            .datum(data)
-//            .attr("class", "areaHigh")
-//            .attr("fill", "#41cdfb")
-//            .attr("opacity", ".4")
-//            .attr("stroke", "black")
-//            .attr("stroke-width", ".5")
-//            .attr("stroke-opacity", ".6")
-//            .attr("d", areaHigh);
-//
-//    svg.append("path")
-//            .datum(data)
-//            .attr("class", "areaLow")
-//            .attr("opacity", ".4")
-//            .attr("fill", "#075ef4")
-//            .attr("stroke", "black")
-//            .attr("stroke-width", ".5")
-//            .attr("stroke-opacity", ".6")
-//            .attr("d", areaLow);
-
 
     // create x-axis
     svg.append("g")
@@ -451,48 +413,6 @@ function draw(data) {
             .text(yAxisUnits === "NONE" ? "" : yAxisUnits);
 
     console.log("finished axes");
-
-
-
-
-//    var radius = 2;
-//    var edgeToCenter = 2;
-
-
-    // The bars of the bar graph
-//    svg.selectAll("rect.candle")
-//            .data(data)
-//            .enter().append("rect")
-//            .attr("class", "candle")
-//            .attr("x", function (d) {
-//                return timeScale(d.x);
-//            })
-//            .attr("y", function (d) {
-//                return yScale(d.high);
-//            })
-//            .attr("height", function (d) {
-//                return (height - yScale(d.high)) - (height - yScale(d.low));
-//            })
-//            .attr("width", function (d) {
-//                return  (width / data.length -12  );
-//            })
-//            .attr("data-rhq-value", function (d) {
-//                return d.y;
-//            })
-//            .attr("data-rhq-high-value", function (d) {
-//                return d.high;
-//            })
-//            .attr("data-rhq-low-value", function (d) {
-//                return d.low;
-//            })
-//            .attr("data-rhq-time", function (d) {
-//                var myDate = new Date(d.x);
-//                return myDate.getHours() + ":" + myDate.getMinutes();
-//            })
-//            .attr("opacity", 0.6)
-//            .attr("fill", "grey");
-
-
 
     // peak Line (must be before line.high to look right
     svg.append("path")
@@ -528,98 +448,6 @@ function draw(data) {
             .attr("stroke-opacity", ".6")
             .attr("d", avgLine);
 
-//    svg.append("path")
-//            .datum(data)
-//            .attr("class", "yLine")
-//            .attr("fill", "none")
-//            .attr("stroke", "black")
-//            .attr("stroke-width", "2")
-//            .attr("stroke-opacity", ".6")
-//            .attr("d", line);
-
-
-//    svg.selectAll("line.middleWhisker")
-//            .data(data)
-//            .enter().append("line")
-//            .attr("class", "middleWhisker")
-//            .attr("x1", function (d) {
-//                return timeScale(d.x);
-//            })
-//            .attr("x2", function (d) {
-//                return timeScale(d.x) + ( 4 * edgeToCenter);
-//            })
-//            .attr("y1", function (d) {
-//                return yScale(d.y);
-//            })
-//            .attr("y2", function (d) {
-//                return yScale(d.y);
-//            })
-//            .attr("stroke-width", "2")
-//            .attr("stroke-opacity", ".5")
-//            .attr("stroke", "black");
-
-//    svg.selectAll("line.highWhisker")
-//            .data(data)
-//            .enter().append("line")
-//            .attr("class", "highWhisker")
-//            .attr("x1", function (d) {
-//                return timeScale(d.x);
-//            })
-//            .attr("x2", function (d) {
-//                return timeScale(d.x) + ( 4 * edgeToCenter);
-//            })
-//            .attr("y1", function (d) {
-//                return yScale(d.high);
-//            })
-//            .attr("y2", function (d) {
-//                return yScale(d.high);
-//            })
-//            .attr("stroke-width", "1")
-//            .attr("stroke-opacity", ".7")
-//            .attr("stroke", "magenta");
-
-//    svg.selectAll("line.lowWhisker")
-//            .data(data)
-//            .enter().append("line")
-//            .attr("class", "lowWhisker")
-//            .attr("x1", function (d) {
-//                return timeScale(d.x);
-//            })
-//            .attr("x2", function (d) {
-//                return timeScale(d.x) + ( 4 * edgeToCenter);
-//            })
-//            .attr("y1", function (d) {
-//                return yScale(d.low);
-//            })
-//            .attr("y2", function (d) {
-//                return yScale(d.low);
-//            })
-//            .attr("stroke-width", "1")
-//            .attr("stroke-opacity", ".7")
-//            .attr("stroke", "magenta");
-
-
-    // Whisker stem
-//    svg.selectAll("line.stem")
-//            .data(data)
-//            .enter().append("line")
-//            .attr("class", "stem")
-//            .attr("x1", function (d) {
-//                return timeScale(d.x) + (2 * edgeToCenter);
-//            })
-//            .attr("x2", function (d) {
-//                return timeScale(d.x) + (2 * edgeToCenter);
-//            })
-//            .attr("y1", function (d) {
-//                return yScale(d.high) -2;
-//            })
-//            .attr("y2", function (d) {
-//                return yScale(d.low) +2;
-//            })
-//            .attr("stroke-width", "3")
-//            .attr("stroke-opacity", ".7")
-//            //.attr("stroke-dasharray", "2,2")
-//            .attr("stroke", "magenta");
 //
 
 //    svg.selectAll("line.base.stem")
