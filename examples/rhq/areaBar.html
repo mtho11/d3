@@ -24,7 +24,8 @@
         .y.axis  text  {
             font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
             font-size: 10px;
-            stroke: #50505a;
+            /*stroke: #50505a;*/
+            stroke: darkgray;
         }
 
          .y.axis path {
@@ -154,6 +155,7 @@ function draw(data) {
     var min = d3.min(data.map(function (d) {
         return d.low;
     }));
+
 
     var timeScale = d3.time.scale()
             .range([0, width])
@@ -366,6 +368,8 @@ function draw(data) {
                 }
             });
 
+    var dateFormatter = d3.time.format("%I:%M:%S %P");
+
     // the labels for x axis
     svg.selectAll("rect.customXAxisLabel")
             .data(data)
@@ -383,14 +387,14 @@ function draw(data) {
             })
             .attr("text-anchor", "left").
             text(function(d,i) {
-                var date = new Date(d.x);
+                var date = new Date(+d.x);
                 if (i % 5 == 0 ) {
-                    return date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+                    return dateFormatter(date);
                 } else {
                     return  "";
                 }
             })
-            .attr("fill", "darkgray")
+            .attr("fill", "#a7a7ac")
             .attr("opacity", 1);
 
 
