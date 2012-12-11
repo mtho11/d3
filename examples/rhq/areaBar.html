@@ -23,7 +23,7 @@
         }
 
         .x.axis path {
-            /* display: none;*/
+             display: none;
         }
     </style>
 </head>
@@ -301,7 +301,7 @@ function draw(data) {
                 }
             });
 
-    // The gray bars at the bottom leading up
+    // custom x-axis
     svg.selectAll("rect.customXAxis")
             .data(data)
             .enter().append("rect")
@@ -327,7 +327,7 @@ function draw(data) {
                 }
             });
 
-    // The gray bars at the bottom leading up
+    // Custom knobs on xaxis every 5th one
     svg.selectAll("rect.customXAxisKnobs")
             .data(data)
             .enter().append("rect")
@@ -357,6 +357,33 @@ function draw(data) {
                     return  "#dadde0";
                 }
             });
+
+    // the labels for x axis
+    svg.selectAll("rect.customXAxisLabel")
+            .data(data)
+            .enter().append("text")
+            .attr("class", "customXAxisLabel")
+            .attr("x", function (d) {
+                return timeScale(d.x) ;
+            })
+            .attr("y", function (d) {
+                return  yScale(lowBound) +10;
+            })
+            .attr("dy", "1.2em")
+            .attr("dx", function (d) {
+                return  (((width / data.length - barOffset) /2) -2 );
+            })
+            .attr("text-anchor", "left").
+            text(function(d,i) {
+                var date = new Date(d.x);
+                if (i % 5 == 0 ) {
+                    return date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+                } else {
+                    return  "";
+                }
+            })
+            .attr("fill", "darkgray")
+            .attr("opacity", 1);
 
 
     svg.selectAll("rect.high")
