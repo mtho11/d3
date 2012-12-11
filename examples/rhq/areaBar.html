@@ -16,6 +16,10 @@
             shape-rendering: crispEdges;
         }
 
+        .grid .tick {
+            stroke: #CCC;
+        }
+
         .x.axis path {
             /* display: none;*/
         }
@@ -169,6 +173,8 @@ function draw(data) {
             .ticks(10)
             .orient("left");
 
+
+
     var interpolation = "basis";
     var avgLine = d3.svg.line()
             .interpolate(interpolation)
@@ -233,6 +239,34 @@ function draw(data) {
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top - titleHeight - titleSpace + margin.bottom)
             .attr("transform", "translate(" + margin.left + "," + (+titleHeight + titleSpace +margin.top) + ")");
+
+
+    function makeYAxis() {
+        return d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .ticks(10)
+    }
+
+    svg.append("g").classed("grid y_grid", true)
+            .call(makeYAxis()
+                    .tickSize(-width,0,0)
+                    .tickFormat("")
+            );
+
+//    // make the grid lines
+//    function makeXAxis() {
+//        return d3.svg.axis()
+//                .scale(timeScale)
+//                .orient("bottom")
+//                .ticks(8)
+//    }
+//    svg.append("g").classed("grid x_grid", true)
+//            .attr("transform", "translate(0,"+height+")")
+//            .call(makeXAxis()
+//                    .tickSize(-height,0,0)
+//                    .tickFormat("")
+//            );
 
     var barOffset = 17;
 
