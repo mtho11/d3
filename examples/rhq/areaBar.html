@@ -18,14 +18,14 @@
         }
 
         .grid .tick {
-            stroke: #CCC;
+            stroke: #fafafa;
             stroke-opacity: .5;
         }
         .y.axis  text  {
             font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
             font-size: 10px;
             /*stroke: #50505a;*/
-            stroke: darkgray;
+            stroke: #a7a7ac;
         }
 
          .y.axis path {
@@ -40,13 +40,13 @@
     <div id="rChart-myChart">
         <svg>
             <defs>
-                <linearGradient id="gradBackground" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:rgb(74,74,74);stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:rgb(118,118,118);stop-opacity:1"/>
+                <linearGradient id="headerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#707883;stop-opacity:1"/>
+                    <stop offset="100%" style="stop-color:#425b64;stop-opacity:1"/>
                 </linearGradient>
                 <linearGradient id="topBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:rgb(13,48,141);stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:rgb(19,87,140);stop-opacity:.8"/>
+                    <stop offset="0%" style="stop-color:rgb(14,97,169);stop-opacity:1"/>
+                    <stop offset="100%" style="stop-color:rgb(66,170,223);stop-opacity:.8"/>
                 </linearGradient>
                 <linearGradient id="bottomBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" style="stop-color:rgb(47,131,173);stop-opacity:1"/>
@@ -243,7 +243,7 @@ function draw(data) {
             .attr("y", margin.top)
             .attr("height", titleHeight)
             .attr("width", width + 10)
-            .attr("fill", "url(#gradBackground)");
+            .attr("fill", "url(#headerGrad)");
 
     var svg = chart.append("g")
             .attr("width", width + margin.left + margin.right)
@@ -262,7 +262,7 @@ function draw(data) {
             );
 
 
-    var barOffset = 18, pixelsOffHeight = 5;
+    var barOffset = 19, pixelsOffHeight = 5;
 
     // The gray bars at the bottom leading up
     svg.selectAll("rect.leaderBar")
@@ -304,9 +304,9 @@ function draw(data) {
                     return  "url(#grayStripes)";
                 } else {
                     if (i % 5 == 0) {
-                        return  "darkgray";
+                        return  "#a7a7ac";
                     } else {
-                        return  "#dadde0";
+                        return  "#d3d3d6";
                     }
                 }
             });
@@ -331,9 +331,9 @@ function draw(data) {
             .attr("opacity", 1)
             .attr("fill", function (d,i) {
                 if (i % 5 == 0) {
-                    return  "darkgray";
+                    return  "#a7a7ac";
                 } else {
-                    return  "#dadde0";
+                    return  "#d3d3d6";
                 }
             });
 
@@ -350,7 +350,7 @@ function draw(data) {
             })
             .attr("height", function (d,i) {
                 if (i % 5 == 0 ) {
-                    return (height - yScale(lowBound)) + 6;
+                    return (height - yScale(lowBound)) + 7;
                 } else {
                     return 0;
                 }
@@ -362,11 +362,48 @@ function draw(data) {
             .attr("fill", function (d,i) {
 
                 if (i % 5 == 0 ) {
-                    return  "darkgray";
+                    return  "#a7a7ac";
                 } else {
-                    return  "#dadde0";
+                    return  "#d3d3d6";
                 }
             });
+    // Custom knobs on
+    svg.selectAll("rect.customXAxisKnobsSmall")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "customXAxisKnobsSmall")
+            .attr("x", function (d) {
+                return timeScale(d.x) + 4;
+            })
+            .attr("y", function (d) {
+                return  yScale(lowBound) +5;
+            })
+            .attr("height", function (d,i) {
+                if (i % 5 != 0 ) {
+                    return (height - yScale(lowBound)) + 3;
+                } else {
+                    return 0;
+                }
+            })
+            .attr("width", function (d) {
+                return  (((width / data.length - barOffset) /2) -3);
+            })
+            .attr("opacity", 1)
+            .attr("fill", function (d,i) {
+
+                if (i % 5 == 0 ) {
+                    return  "#a7a7ac";
+                } else {
+                    return  "#d3d3d6";
+                }
+            });
+
+
+
+
+
+
+
 
     var dateFormatter = d3.time.format("%I:%M:%S %P");
 
@@ -447,56 +484,56 @@ function draw(data) {
         //.attr("fill", "#42aadf");
             .attr("fill", "url(#bottomBarGrad)");
 
-    svg.selectAll("rect.outline")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "outline")
-            .attr("x", function (d) {
-                return timeScale(d.x);
-            })
-            .attr("y", function (d) {
-                return yScale(d.high);
-            })
-            .attr("height", function (d) {
-                if (d.down || d.nodata) {
-                    return height - yScale(lowBound);
-                } else {
-
-                    return  yScale(d.low) - yScale(d.high);
-                }
-            })
-            .attr("width", function (d) {
-                return  (width / data.length - barOffset );
-            })
-            .attr("opacity", 0.8)
-            .attr("stroke-width", 0.5)
-            .attr("stroke", "black")
-            .attr("fill", "none");
+//    svg.selectAll("rect.outline")
+//            .data(data)
+//            .enter().append("rect")
+//            .attr("class", "outline")
+//            .attr("x", function (d) {
+//                return timeScale(d.x);
+//            })
+//            .attr("y", function (d) {
+//                return yScale(d.high);
+//            })
+//            .attr("height", function (d) {
+//                if (d.down || d.nodata) {
+//                    return height - yScale(lowBound);
+//                } else {
+//
+//                    return  yScale(d.low) - yScale(d.high);
+//                }
+//            })
+//            .attr("width", function (d) {
+//                return  (width / data.length - barOffset );
+//            })
+//            .attr("opacity", 0.8)
+//            .attr("stroke-width", 0.5)
+//            .attr("stroke", "black")
+//            .attr("fill", "none");
 
     var valueBarThickness = 2;
 
-    svg.selectAll("rect.value")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "value")
-            .attr("x", function (d) {
-                return timeScale(d.x);
-            })
-            .attr("y", function (d) {
-                return yScale(d.y) - valueBarThickness;
-            })
-            .attr("height", function (d) {
-                if (d.down || d.nodata) {
-                    return height - yScale(lowBound);
-                } else {
-                    return   yScale(d.y) - yScale(d.y) + valueBarThickness;
-                }
-            })
-            .attr("width", function (d) {
-                return  (width / data.length - barOffset );
-            })
-            .attr("opacity", 0.5)
-            .attr("fill", "black");
+//    svg.selectAll("rect.value")
+//            .data(data)
+//            .enter().append("rect")
+//            .attr("class", "value")
+//            .attr("x", function (d) {
+//                return timeScale(d.x);
+//            })
+//            .attr("y", function (d) {
+//                return yScale(d.y) - valueBarThickness;
+//            })
+//            .attr("height", function (d) {
+//                if (d.down || d.nodata) {
+//                    return height - yScale(lowBound);
+//                } else {
+//                    return   yScale(d.y) - yScale(d.y) + valueBarThickness;
+//                }
+//            })
+//            .attr("width", function (d) {
+//                return  (width / data.length - barOffset );
+//            })
+//            .attr("opacity", 0.5)
+//            .attr("fill", "black");
 
 
     // create x-axis
@@ -527,7 +564,7 @@ function draw(data) {
             .attr("class", "peakLine")
             .attr("fill", "none")
             .attr("stroke", "red")
-            .attr("stroke-width", "2")
+            .attr("stroke-width", "1")
             .attr("stroke-dasharray", "3,3")
             .attr("stroke-opacity", ".4")
             .attr("d", peakLine);
@@ -538,7 +575,7 @@ function draw(data) {
             .attr("class", "minLine")
             .attr("fill", "none")
             .attr("stroke", "steelblue")
-            .attr("stroke-width", "2")
+            .attr("stroke-width", "1")
             .attr("stroke-dasharray", "3,3")
         //.attr("stroke-dasharray", "20,10,5,5,5,10")
             .attr("stroke-opacity", ".6")
@@ -550,7 +587,7 @@ function draw(data) {
             .attr("class", "avgLine")
             .attr("fill", "none")
             .attr("stroke", "green")
-            .attr("stroke-width", "2")
+            .attr("stroke-width", "1")
             .attr("stroke-dasharray", "3,3")
             .attr("stroke-opacity", ".6")
             .attr("d", avgLine);
