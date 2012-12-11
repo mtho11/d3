@@ -5,10 +5,11 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <style>
         body {
-            font-family: "Liberation Sans",  Arial, Helvetica, sans-serif;
+            font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
             font-size: 10px;
             color: #50505a;
         }
+
         .axis path,
         .axis line {
             fill: none;
@@ -33,25 +34,25 @@
     <div id="rChart-myChart">
         <svg>
             <defs>
-            <linearGradient id="gradBackground" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style="stop-color:rgb(74,74,74);stop-opacity:1" />
-                <stop offset="100%" style="stop-color:rgb(118,118,118);stop-opacity:1" />
-            </linearGradient>
+                <linearGradient id="gradBackground" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgb(74,74,74);stop-opacity:1"/>
+                    <stop offset="100%" style="stop-color:rgb(118,118,118);stop-opacity:1"/>
+                </linearGradient>
                 <linearGradient id="topBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:rgb(13,48,141);stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:rgb(19,87,140);stop-opacity:.8" />
+                    <stop offset="0%" style="stop-color:rgb(13,48,141);stop-opacity:1"/>
+                    <stop offset="100%" style="stop-color:rgb(19,87,140);stop-opacity:.8"/>
                 </linearGradient>
                 <linearGradient id="bottomBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:rgb(47,131,173);stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:rgb(46,172,218);stop-opacity:.3" />
+                    <stop offset="0%" style="stop-color:rgb(47,131,173);stop-opacity:1"/>
+                    <stop offset="100%" style="stop-color:rgb(46,172,218);stop-opacity:.3"/>
                 </linearGradient>
-             <pattern id="grayStripes" patternUnits="userSpaceOnUse" x="0" y="0"
+                <pattern id="grayStripes" patternUnits="userSpaceOnUse" x="0" y="0"
                          width="6" height="3">
-                    <path d="M 0 0 6 0" style="stroke:gray; fill:none;" />
-             </pattern>
+                    <path d="M 0 0 6 0" style="stroke:gray; fill:none;"/>
+                </pattern>
                 <pattern id="redStripes" patternUnits="userSpaceOnUse" x="0" y="0"
                          width="6" height="3">
-                    <path d="M 0 0 6 0" style="stroke:red; fill:none;" />
+                    <path d="M 0 0 6 0" style="stroke:red; fill:none;"/>
                 </pattern>
             </defs>
         </svg>
@@ -68,74 +69,74 @@ var chartId = "myChart",
         xAxisLabel = "Time";
 
 var json = eval([
-    { x:1352204720548, high:5.016642348035599646, low:3.016642348035599646, y:4.016642348035599646},
-    { x:1352211680548, high:8.000200003333388, low:4.0, y:5.500050000833347},
-    { x:1352211920548, high:2.000033333888898, low:1.999966667222213, y:2.000000000277778},
-    { x:1352212160548, high:5.0, low:1.999966667222213, y:2.750000000277778},
-    { x:1352212400548, high:4.0, low:2.0, y:2.5000083334722243},
-    { x:1352212640548, high:2.0, low:1.999966667222213, y:1.9999916668055533},
-    { x:1352212880548, high:3.0, low:2.0, y:2.2500083334722243},
-    { x:1352213120548, high:3.000050000833347, low:2, y:2.2500041672916677},
-    { x:1352213360548, high:6.0, low:1.999966667222213, y:5.0499916668055535},
-    { x:1352213600548, high:7.000033333888898, low:3.999966667222213, y:4.000008333750002},
-    { x:1352213840548, high:2.0, low:1.999966667222213, y:1.9999916668055533},
-    { x:1352214080548, high:3.0, low:1.999966667222213, y:2.250000000277778},
-    { x:1352214320548, high:4.0, low:2.0, y:2.5},
-    { x:1352214560548, high:3.0, low:1.999966667222213, y:2.250000000833347, nodata:true},
-    { x:1352214800548, high:2.000033333888898, low:1.999966667222213, y:2.000000000277778, nodata:true},
-    { x:1352215040548, high:4.0, low:2.0, y:2.5},
-    { x:1352215280548, high:3.0, low:2.0, y:2.2500083334722243},
-    { x:1352215520548, high:2.0, low:1.999966667222213, y:1.9999916668055533, down:true},
-    { x:1352215760548, high:3.0, low:1.999966667222213, y:2.250000000277778, down:true},
-    { x:1352216000548, high:4.0, low:2.0, y:2.5},
-    { x:1352216240548, high:2.000066668888963, low:1.999966667222213, y:2.000008334027794},
-    { x:1352216480548, high:3.0, low:1.999966667222213, y:2.2499916668055535}
+    { x: 1352204720548, high: 5.016642348035599646, low: 3.016642348035599646, y: 4.016642348035599646},
+    { x: 1352211680548, high: 8.000200003333388, low: 4.0, y: 5.500050000833347},
+    { x: 1352211920548, high: 2.000033333888898, low: 1.999966667222213, y: 2.000000000277778},
+    { x: 1352212160548, high: 5.0, low: 1.999966667222213, y: 2.750000000277778},
+    { x: 1352212400548, high: 4.0, low: 2.0, y: 2.5000083334722243},
+    { x: 1352212640548, high: 2.0, low: 1.999966667222213, y: 1.9999916668055533},
+    { x: 1352212880548, high: 3.0, low: 2.0, y: 2.2500083334722243},
+    { x: 1352213120548, high: 3.000050000833347, low: 2, y: 2.2500041672916677},
+    { x: 1352213360548, high: 6.0, low: 1.999966667222213, y: 5.0499916668055535},
+    { x: 1352213600548, high: 7.000033333888898, low: 3.999966667222213, y: 4.000008333750002},
+    { x: 1352213840548, high: 2.0, low: 1.999966667222213, y: 1.9999916668055533},
+    { x: 1352214080548, high: 3.0, low: 1.999966667222213, y: 2.250000000277778},
+    { x: 1352214320548, high: 4.0, low: 2.0, y: 2.5},
+    { x: 1352214560548, high: 3.0, low: 1.999966667222213, y: 2.250000000833347, nodata: true},
+    { x: 1352214800548, high: 2.000033333888898, low: 1.999966667222213, y: 2.000000000277778, nodata: true},
+    { x: 1352215040548, high: 4.0, low: 2.0, y: 2.5},
+    { x: 1352215280548, high: 3.0, low: 2.0, y: 2.2500083334722243},
+    { x: 1352215520548, high: 2.0, low: 1.999966667222213, y: 1.9999916668055533, down: true},
+    { x: 1352215760548, high: 3.0, low: 1.999966667222213, y: 2.250000000277778, down: true},
+    { x: 1352216000548, high: 4.0, low: 2.0, y: 2.5},
+    { x: 1352216240548, high: 2.000066668888963, low: 1.999966667222213, y: 2.000008334027794},
+    { x: 1352216480548, high: 3.0, low: 1.999966667222213, y: 2.2499916668055535}
 ]);
 var json2 = eval(
         [
-            { x:1353860526384, high:1.0000333344444814, low:0.005050312475458637, y:0.9751266746243866},
-            { x:1353865926384, high:160.0268171136186, low:0.9999833336111065, y:21.144743338839582},
-            { x:1353871326384, high:149.0, low:0.0, y:5.189418869590717},
-            { x:1353876726384, high:5.000083334722245, low:1.999966667222213, y:2.466857373201945},
-            { x:1353882126384, high:4.9999166680555325, low:1.999866675554963, y:2.411110741376545},
-            { x:1353887526384, high:5.0, low:1.999966667222213, y:2.4111100003456785},
-            { x:1353892926384, high:4.0, low:0.9997334044254865, y:1.1625006269826392},
-            { x:1353898326384, high:24.0, low:0.0, y:5.962227999053264},
-            { x:1353936126384, high:1.000016666944449, low:0.004979783737951828, y:0.9423038932853648},
-            { x:1353941526384, high:40.99323344610923, low:0.0, y:6.099925557049361},
-            { x:1353946926384, high:5.000083334722245, low:2.9999000033332224, y:3.1555537043456754},
-            { x:1353952326384, high:5.000166672222407, low:2.9999500008333193, y:3.166669048134926},
-            { x:1353963126384, high:21.00035000583343, low:0.0, y:3.1876754880905587},
-            { x:1353968526384, high:5.0, low:1.9999333355554816, y:2.1555535190277726},
-            { x:1353973926384, high:5.000083334722245, low:1.9999333355554816, y:2.1666675930154318},
-            { x:1353979326384, high:4.9999166680555325, low:1.999966667222213, y:2.15384551318376},
-            { x:1354022526384, high:5.0, low:0.03840652954895509, y:3.101282440633114},
-            { x:1354027926384, high:5.000083334722245, low:2.9999000033332224, y:3.1444422227654285},
-            { x:1354033326384, high:30.0, low:0.9999666677777408, y:1.5280897005649188},
-            { x:1354038726384, high:1.0000333344444814, low:0.9999833336111065, y:1.0000001853179015},
-            { x:1354044126384, high:1.0000333344444814, low:0.9999666677777408, y:0.9999998149907401},
-            { x:1354049526384, high:1.0000333344444814, low:0.0, y:0.9888890742129631},
-            { x:1354054926384, high:1.0000333344444814, low:0.9999833336111065, y:1.000000000160495},
-            { x:1354060326384, high:1.0000333344444814, low:0.9999833336111065, y:1.000000000135803},
-            { x:1354065726384, high:1.0000333344444814, low:0.9999666677777408, y:1.0000000001872669},
-            { x:1354071126384, high:1.0000333344444814, low:0.07256039846945933, y:0.9784316373545864},
-            { x:1354092726384, high:0.005526877458395394, low:0.005526877458395394, y:0.005526877458395394},
-            { x:1354108926384, high:1.000016666944449, low:0.008148809207719801, y:0.9680053381196023},
-            { x:1354114326384, high:1.0000333344444814, low:0.9999666677777408, y:0.9999998149845675},
-            { x:1354119726384, high:1459.0243170719511, low:0.9999666677777408, y:20.83360259738896},
-            { x:1354125126384, high:83.0, low:0.9999666677777408, y:4.2777905561080285},
-            { x:1354130526384, high:5.000166672222407, low:2.9999000033332224, y:3.1555553709413573},
-            { x:1354135926384, high:5.0, low:2.9999000033332224, y:3.1666659264197516},
-            { x:1354141326384, high:6.924568368571692, low:1.5650268662945381, y:3.194329206807157},
-            { x:1354146726384, high:5.000166672222407, low:2.9999000033332224, y:3.2000016673981477},
-            { x:1354152126384, high:12.0, low:0.9999833336111065, y:3.224718727228463}
+            { x: 1353860526384, high: 1.0000333344444814, low: 0.005050312475458637, y: 0.9751266746243866},
+            { x: 1353865926384, high: 160.0268171136186, low: 0.9999833336111065, y: 21.144743338839582},
+            { x: 1353871326384, high: 149.0, low: 0.0, y: 5.189418869590717},
+            { x: 1353876726384, high: 5.000083334722245, low: 1.999966667222213, y: 2.466857373201945},
+            { x: 1353882126384, high: 4.9999166680555325, low: 1.999866675554963, y: 2.411110741376545},
+            { x: 1353887526384, high: 5.0, low: 1.999966667222213, y: 2.4111100003456785},
+            { x: 1353892926384, high: 4.0, low: 0.9997334044254865, y: 1.1625006269826392},
+            { x: 1353898326384, high: 24.0, low: 0.0, y: 5.962227999053264},
+            { x: 1353936126384, high: 1.000016666944449, low: 0.004979783737951828, y: 0.9423038932853648},
+            { x: 1353941526384, high: 40.99323344610923, low: 0.0, y: 6.099925557049361},
+            { x: 1353946926384, high: 5.000083334722245, low: 2.9999000033332224, y: 3.1555537043456754},
+            { x: 1353952326384, high: 5.000166672222407, low: 2.9999500008333193, y: 3.166669048134926},
+            { x: 1353963126384, high: 21.00035000583343, low: 0.0, y: 3.1876754880905587},
+            { x: 1353968526384, high: 5.0, low: 1.9999333355554816, y: 2.1555535190277726},
+            { x: 1353973926384, high: 5.000083334722245, low: 1.9999333355554816, y: 2.1666675930154318},
+            { x: 1353979326384, high: 4.9999166680555325, low: 1.999966667222213, y: 2.15384551318376},
+            { x: 1354022526384, high: 5.0, low: 0.03840652954895509, y: 3.101282440633114},
+            { x: 1354027926384, high: 5.000083334722245, low: 2.9999000033332224, y: 3.1444422227654285},
+            { x: 1354033326384, high: 30.0, low: 0.9999666677777408, y: 1.5280897005649188},
+            { x: 1354038726384, high: 1.0000333344444814, low: 0.9999833336111065, y: 1.0000001853179015},
+            { x: 1354044126384, high: 1.0000333344444814, low: 0.9999666677777408, y: 0.9999998149907401},
+            { x: 1354049526384, high: 1.0000333344444814, low: 0.0, y: 0.9888890742129631},
+            { x: 1354054926384, high: 1.0000333344444814, low: 0.9999833336111065, y: 1.000000000160495},
+            { x: 1354060326384, high: 1.0000333344444814, low: 0.9999833336111065, y: 1.000000000135803},
+            { x: 1354065726384, high: 1.0000333344444814, low: 0.9999666677777408, y: 1.0000000001872669},
+            { x: 1354071126384, high: 1.0000333344444814, low: 0.07256039846945933, y: 0.9784316373545864},
+            { x: 1354092726384, high: 0.005526877458395394, low: 0.005526877458395394, y: 0.005526877458395394},
+            { x: 1354108926384, high: 1.000016666944449, low: 0.008148809207719801, y: 0.9680053381196023},
+            { x: 1354114326384, high: 1.0000333344444814, low: 0.9999666677777408, y: 0.9999998149845675},
+            { x: 1354119726384, high: 1459.0243170719511, low: 0.9999666677777408, y: 20.83360259738896},
+            { x: 1354125126384, high: 83.0, low: 0.9999666677777408, y: 4.2777905561080285},
+            { x: 1354130526384, high: 5.000166672222407, low: 2.9999000033332224, y: 3.1555553709413573},
+            { x: 1354135926384, high: 5.0, low: 2.9999000033332224, y: 3.1666659264197516},
+            { x: 1354141326384, high: 6.924568368571692, low: 1.5650268662945381, y: 3.194329206807157},
+            { x: 1354146726384, high: 5.000166672222407, low: 2.9999000033332224, y: 3.2000016673981477},
+            { x: 1354152126384, high: 12.0, low: 0.9999833336111065, y: 3.224718727228463}
         ]
 );
 
 function draw(data) {
     "use strict";
 
-    var margin = {top:10, right:5, bottom:30, left:40},
+    var margin = {top: 10, right: 5, bottom: 30, left: 40},
             width = 700 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom;
 
@@ -152,16 +153,16 @@ function draw(data) {
     var timeScale = d3.time.scale()
             .range([0, width])
             .domain(d3.extent(data, function (d) {
-        return d.x;
-    }));
+                return d.x;
+            }));
 
     // adjust the min scale so blue low line is not in axis
-    var lowBound = min - ((peak - min)* 0.1);
-    var highBound = peak + ((peak - min)* 0.1);
+    var lowBound = min - ((peak - min) * 0.1);
+    var highBound = peak + ((peak - min) * 0.1);
 
     var yScale = d3.scale.linear()
             .rangeRound([height, 0])
-            .domain([lowBound,highBound]);
+            .domain([lowBound, highBound]);
 
     var xAxis = d3.svg.axis()
             .scale(timeScale)
@@ -173,7 +174,6 @@ function draw(data) {
             .scale(yScale)
             .ticks(10)
             .orient("left");
-
 
 
     var interpolation = "basis";
@@ -233,14 +233,13 @@ function draw(data) {
             .attr("x", margin.left)
             .attr("y", margin.top)
             .attr("height", titleHeight)
-            .attr("width", width+10)
+            .attr("width", width + 10)
             .attr("fill", "url(#gradBackground)");
 
     var svg = chart.append("g")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top - titleHeight - titleSpace + margin.bottom)
-            .attr("transform", "translate(" + margin.left + "," + (+titleHeight + titleSpace +margin.top) + ")");
-
+            .attr("transform", "translate(" + margin.left + "," + (+titleHeight + titleSpace + margin.top) + ")");
 
 
     // create the y axis grid lines
@@ -249,7 +248,7 @@ function draw(data) {
                     .scale(yScale)
                     .orient("left")
                     .ticks(10)
-                    .tickSize(-width,0,0)
+                    .tickSize(-width, 0, 0)
                     .tickFormat("")
             );
 
@@ -265,16 +264,16 @@ function draw(data) {
                 return timeScale(d.x);
             })
             .attr("y", function (d) {
-                if(d.down || d.nodata){
+                if (d.down || d.nodata) {
                     return yScale(highBound);
-                }else {
+                } else {
                     return yScale(d.high);
                 }
             })
             .attr("height", function (d) {
-                if(d.down || d.nodata){
+                if (d.down || d.nodata) {
                     return height - yScale(highBound);
-                }else {
+                } else {
                     return height - yScale(d.high);
                 }
             })
@@ -282,21 +281,21 @@ function draw(data) {
                 return  (width / data.length - barOffset  );
             })
 
-        .attr("opacity", function(d) {
-               if(d.down){
-                  return .55;
-               } else {
-                   return .55;
-               }
+            .attr("opacity", function (d) {
+                if (d.down) {
+                    return .55;
+                } else {
+                    return .55;
+                }
             })
-        .attr("fill", function (d) {
-        if(d.down){
-            return  "url(#redStripes)";
-        }else if(d.nodata){
-            return  "url(#grayStripes)";
-        }else {
-            return  "#dadde0";
-        }
+            .attr("fill", function (d) {
+                if (d.down) {
+                    return  "url(#redStripes)";
+                } else if (d.nodata) {
+                    return  "url(#grayStripes)";
+                } else {
+                    return  "#dadde0";
+                }
             });
 
 
@@ -311,17 +310,17 @@ function draw(data) {
                 return yScale(d.high);
             })
             .attr("height", function (d) {
-                if(d.down || d.nodata){
-                   return height - yScale(lowBound);
-                }else {
+                if (d.down || d.nodata) {
+                    return height - yScale(lowBound);
+                } else {
                     return  yScale(d.y) - yScale(d.high);
                 }
             })
             .attr("width", function (d) {
-                return  (width / data.length -barOffset  );
+                return  (width / data.length - barOffset  );
             })
             .attr("opacity", 0.8)
-            //.attr("fill", "#084581");
+        //.attr("fill", "#084581");
             .attr("fill", "url(#topBarGrad)");
 
 
@@ -336,7 +335,7 @@ function draw(data) {
                 return yScale(d.y);
             })
             .attr("height", function (d) {
-                if(d.down || d.nodata){
+                if (d.down || d.nodata) {
                     return height - yScale(lowBound);
                 } else {
                     return  yScale(d.low) - yScale(d.y);
@@ -346,8 +345,8 @@ function draw(data) {
                 return  (width / data.length - barOffset );
             })
             .attr("opacity", 0.8)
-            //.attr("fill", "#42aadf");
-           .attr("fill", "url(#bottomBarGrad)");
+        //.attr("fill", "#42aadf");
+            .attr("fill", "url(#bottomBarGrad)");
 
     svg.selectAll("rect.outline")
             .data(data)
@@ -360,7 +359,7 @@ function draw(data) {
                 return yScale(d.high);
             })
             .attr("height", function (d) {
-                if(d.down || d.nodata){
+                if (d.down || d.nodata) {
                     return height - yScale(lowBound);
                 } else {
 
@@ -388,9 +387,9 @@ function draw(data) {
                 return yScale(d.y) - valueBarThickness;
             })
             .attr("height", function (d) {
-                if(d.down || d.nodata){
+                if (d.down || d.nodata) {
                     return height - yScale(lowBound);
-                }else {
+                } else {
                     return   yScale(d.y) - yScale(d.y) + valueBarThickness;
                 }
             })
@@ -441,7 +440,7 @@ function draw(data) {
             .attr("stroke", "steelblue")
             .attr("stroke-width", "2")
             .attr("stroke-dasharray", "3,3")
-            //.attr("stroke-dasharray", "20,10,5,5,5,10")
+        //.attr("stroke-dasharray", "20,10,5,5,5,10")
             .attr("stroke-opacity", ".6")
             .attr("d", minLine);
 
