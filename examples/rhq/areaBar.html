@@ -511,10 +511,11 @@ function draw(data) {
             .attr("class", "y axis")
             .call(yAxis)
             .append("text")
-            .attr("transform", "rotate(-90)")
+            .attr("transform", "rotate(-90),translate( -60,0)")
             .attr("y", -35)
             .attr("dy", ".71em")
             .attr("font-size", "10px")
+            .attr("letter-spacing", "2")
             .style("text-anchor", "end")
             .text(yAxisUnits === "NONE" ? "" : yAxisUnits);
 
