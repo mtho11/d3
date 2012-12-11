@@ -21,8 +21,13 @@
             stroke: #CCC;
             stroke-opacity: .5;
         }
+        .y.axis  text  {
+            font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            stroke: #50505a;
+        }
 
-        .x.axis path {
+         .y.axis path {
              display: none;
         }
     </style>
@@ -167,11 +172,14 @@ function draw(data) {
     var xAxis = d3.svg.axis()
             .scale(timeScale)
             .ticks(0)
+            .tickSize(0, 0, 0)
             .orient("bottom");
 
     var yAxis = d3.svg.axis()
             .scale(yScale)
+            .tickSubdivide(2)
             .ticks(10)
+            .tickSize(6, 3, 0)
             .orient("left");
 
 

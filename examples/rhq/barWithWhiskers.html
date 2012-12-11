@@ -146,6 +146,7 @@ function draw(data) {
     var xAxis = d3.svg.axis()
             .scale(timeScale)
             .ticks(5)
+            .tickSize(6, 3, 0)
             .orient("bottom");
 
     var yAxis = d3.svg.axis()
