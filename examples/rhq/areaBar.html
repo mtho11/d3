@@ -166,8 +166,7 @@ function draw(data) {
 
     var xAxis = d3.svg.axis()
             .scale(timeScale)
-            .ticks(5)
-            .tickSubdivide(5)
+            .ticks(0)
             .orient("bottom");
 
     var yAxis = d3.svg.axis()
@@ -253,9 +252,9 @@ function draw(data) {
             );
 
 
-    var barOffset = 18;
+    var barOffset = 18, pixelsOffHeight = 5;
 
-    // The bars of the bar graph
+    // The gray bars at the bottom leading up
     svg.selectAll("rect.leaderBar")
             .data(data)
             .enter().append("rect")
@@ -272,9 +271,9 @@ function draw(data) {
             })
             .attr("height", function (d) {
                 if (d.down || d.nodata) {
-                    return height - yScale(highBound);
+                    return height - yScale(highBound) - pixelsOffHeight;
                 } else {
-                    return height - yScale(d.high);
+                    return height - yScale(d.high) -pixelsOffHeight;
                 }
             })
             .attr("width", function (d) {
@@ -288,11 +287,72 @@ function draw(data) {
                     return .55;
                 }
             })
-            .attr("fill", function (d) {
+            .attr("fill", function (d,i) {
                 if (d.down) {
                     return  "url(#redStripes)";
                 } else if (d.nodata) {
                     return  "url(#grayStripes)";
+                } else {
+                    if (i % 5 == 0) {
+                        return  "darkgray";
+                    } else {
+                        return  "#dadde0";
+                    }
+                }
+            });
+
+    // The gray bars at the bottom leading up
+    svg.selectAll("rect.customXAxis")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "customXAxis")
+            .attr("x", function (d) {
+                return timeScale(d.x);
+            })
+            .attr("y", function (d) {
+                return  yScale(lowBound) + 2;
+            })
+            .attr("height", function (d) {
+                return height - yScale(lowBound) + 4;
+            })
+            .attr("width", function (d) {
+                return  (width / data.length - barOffset  );
+            })
+            .attr("opacity", 1)
+            .attr("fill", function (d,i) {
+                if (i % 5 == 0) {
+                    return  "darkgray";
+                } else {
+                    return  "#dadde0";
+                }
+            });
+
+    // The gray bars at the bottom leading up
+    svg.selectAll("rect.customXAxisKnobs")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "customXAxisKnobs")
+            .attr("x", function (d) {
+                return timeScale(d.x) + 4;
+            })
+            .attr("y", function (d) {
+                return  yScale(lowBound) +3;
+            })
+            .attr("height", function (d,i) {
+                if (i % 5 == 0 ) {
+                    return (height - yScale(lowBound)) + 6;
+                } else {
+                    return 0;
+                }
+            })
+            .attr("width", function (d) {
+                return  (((width / data.length - barOffset) /2) -2 );
+            })
+            .attr("opacity", 1)
+            .attr("fill", function (d,i) {
+
+                if (i % 5 == 0 ) {
+                    return  "darkgray";
                 } else {
                     return  "#dadde0";
                 }
@@ -444,6 +504,7 @@ function draw(data) {
             .attr("stroke-opacity", ".6")
             .attr("d", minLine);
 
+    // avg line
     svg.append("path")
             .datum(data)
             .attr("class", "avgLine")
