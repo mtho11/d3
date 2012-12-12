@@ -53,18 +53,18 @@
                 </linearGradient>
                 <linearGradient id="leaderBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" style="stop-color:#d3d3d6;stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:#d3d3d6;stop-opacity:.3"/>
+                    <stop offset="100%" style="stop-color:#d3d3d6;stop-opacity:1"/>
                 </linearGradient>
                 <linearGradient id="heavyLeaderBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" style="stop-color:#a7a7ac;stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:#a7a7ac;stop-opacity:.3"/>
+                    <stop offset="100%" style="stop-color:#a7a7ac;stop-opacity:1"/>
                 </linearGradient>
                 <linearGradient id="topBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" style="stop-color:#067aba;stop-opacity:1"/>
                     <stop offset="100%" style="stop-color:#1278a8;stop-opacity:1"/>
                 </linearGradient>
                 <linearGradient id="bottomBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#4fb9e6;stop-opacity:1"/>
+                    <stop offset="0%" style="stop-color:#6bc0e6;stop-opacity:1"/>
                     <stop offset="100%" style="stop-color:#388bb0;stop-opacity:1"/>
                 </linearGradient>
                 <pattern id="grayStripes" patternUnits="userSpaceOnUse" x="0" y="0"
@@ -311,7 +311,6 @@ function draw(data) {
                 .attr("x", baseX + xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
-                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(minValue.toPrecision(3))
                 .attr("fill", fgColor);
@@ -332,7 +331,6 @@ function draw(data) {
                 .attr("x", baseX +  3 * xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
-                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(avgValue.toPrecision(3))
                 .attr("fill", fgColor);
@@ -353,7 +351,6 @@ function draw(data) {
                 .attr("x", baseX +  5 * xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
-                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(highValue.toPrecision(3))
                 .attr("fill", fgColor);
