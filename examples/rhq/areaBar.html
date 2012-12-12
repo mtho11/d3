@@ -140,6 +140,30 @@ var json2 = eval(
         ]
 );
 
+var json3 = eval(
+
+        [
+            { x: 1355255087991, high: 7.0, low: 2.0, y: 4.5},
+            { x: 1355255807991, high: 2.0, low: 2.0, y: 2.0},
+            { x: 1355256527991, high: 3.0, low: 3.0, y: 3.0},
+            { x: 1355257247991, high: 4.0, low: 4.0, y: 4.0},
+            { x: 1355257967991, high: 2.0, low: 2.0, y: 2.0},
+            { x: 1355258687991, high: 3.0, low: 3.0, y: 3.0},
+            { x: 1355259407991, high: 4.0, low: 4.0, y: 4.0},
+            { x: 1355260127991, high: 3.0, low: 3.0, y: 3.0},
+            { x: 1355260847991, high: 4.0, low: 4.0, y: 4.0},
+            { x: 1355261567991, high: 3.0, low: 3.0, y: 3.0},
+            { x: 1355262287991, high: 4.0, low: 3.0, y: 3.5},
+            { x: 1355263007991, high: 3.0, low: 3.0, y: 3.0},
+            { x: 1355263727991, high: 2.0, low: 2.0, y: 2.0, down:true},
+            { x: 1355264447991, high: 2.0, low: 2.0, y: 2.0, down:true},
+            { x: 1355265167991, high: 2.0, low: 2.0, y: 2.0, down:true},
+            { x: 1355265887991, high: 4.0, low: 3.0, y: 3.5},
+            { x: 1355266607991, high: 2.0, low: 2.0, y: 2.0},
+            { x: 1355267327991, high: 2.0, low: 2.0, y: 2.0, nodata:true},
+            { x: 1355268047991, high: 5.0, low: 5.0, y: 5.0, nodata:true}
+        ]
+);
 function draw(data) {
     "use strict";
 
@@ -323,8 +347,12 @@ function draw(data) {
             .attr("y", function (d) {
                 return  yScale(lowBound) + 2;
             })
-            .attr("height", function (d) {
-                return height - yScale(lowBound) + 4;
+            .attr("height", function (d,i ) {
+                if (i % 5 == 0) {
+                    return height - yScale(lowBound) + 4;
+                } else {
+                    return height - yScale(lowBound) + 3;
+                }
             })
             .attr("width", function (d) {
                 return  (width / data.length - barOffset  );
@@ -344,7 +372,7 @@ function draw(data) {
             .enter().append("rect")
             .attr("class", "customXAxisKnobs")
             .attr("x", function (d) {
-                return timeScale(d.x) + 4;
+                return timeScale(d.x) + 5;
             })
             .attr("y", function (d) {
                 return  yScale(lowBound) + 3;
@@ -374,14 +402,14 @@ function draw(data) {
             .enter().append("rect")
             .attr("class", "customXAxisKnobsSmall")
             .attr("x", function (d) {
-                return timeScale(d.x) + 4;
+                return timeScale(d.x) + 5;
             })
             .attr("y", function (d) {
                 return  yScale(lowBound) + 5;
             })
             .attr("height", function (d, i) {
                 if (i % 5 != 0) {
-                    return (height - yScale(lowBound)) + 3;
+                    return (height - yScale(lowBound)) + 2;
                 } else {
                     return 0;
                 }
@@ -537,7 +565,7 @@ function draw(data) {
 
     console.log("finished drawing paths");
 }
-draw(json);
+draw(json3);
 
 </script>
 </body>
