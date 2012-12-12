@@ -222,7 +222,7 @@ function draw(data) {
             .scale(yScale)
             .tickSubdivide(2)
             .ticks(10)
-            .tickSize(6, 3, 0)
+            .tickSize(4, 4, 0)
             .orient("left");
 
 
@@ -269,27 +269,28 @@ function draw(data) {
 
 
     var createHeader = (function (resourceName,minLabel,minValue,avgLabel, avgValue, highLabel, highValue) {
-        var fontSize = 18,
+        var fontSize = 14,
             yTitle = 37,
             fgColor = "#FFFFFF",
-            baseX = 360,
-            xInc = 60;
+            baseX = 440,
+            xInc = 50;
 
 
         // title/header
         var title = chart.append("g").append("rect")
                 .attr("class", "title")
-                .attr("x", margin.left)
+                .attr("x", 10)
                 .attr("y", margin.top)
                 .attr("height", titleHeight)
-                .attr("width", width + 10)
+                .attr("width", width + 30 + margin.left)
                 .attr("fill", "url(#headerGrad)");
 
         chart.append("text")
                 .attr("class", "titleName")
-                .attr("x", 60)
+                .attr("x", 30)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
+                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(resourceName)
                 .attr("fill", fgColor);
@@ -300,6 +301,7 @@ function draw(data) {
                 .attr("x", baseX)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
+                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(minLabel)
                 .attr("fill", fgColor);
@@ -309,6 +311,7 @@ function draw(data) {
                 .attr("x", baseX + xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
+                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(minValue.toPrecision(3))
                 .attr("fill", fgColor);
@@ -319,6 +322,7 @@ function draw(data) {
                 .attr("x", baseX + 2 * xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
+                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(avgLabel)
                 .attr("fill", fgColor);
@@ -328,6 +332,7 @@ function draw(data) {
                 .attr("x", baseX +  3 * xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
+                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(avgValue.toPrecision(3))
                 .attr("fill", fgColor);
@@ -338,6 +343,7 @@ function draw(data) {
                 .attr("x", baseX + 4 * xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
+                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(highLabel)
                 .attr("fill", fgColor);
@@ -347,11 +353,12 @@ function draw(data) {
                 .attr("x", baseX +  5 * xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
+                .attr("font-weight", "bold")
                 .attr("text-anchor", "left")
                 .text(highValue.toPrecision(3))
                 .attr("fill", fgColor);
 
-    }("Resource Name - measure", "Min -",min,"Avg -",avg,"High -",peak));
+    }("RHQ Agent - Agent-Server Clock Difference", "Min -",min,"Avg -",avg,"High -",peak));
 
 
     var svg = chart.append("g")
@@ -599,9 +606,10 @@ function draw(data) {
             .call(yAxis)
             .append("text")
             .attr("transform", "rotate(-90),translate( -60,0)")
-            .attr("y", -35)
-            .attr("dy", ".71em")
+            .attr("y", -30)
+            //.attr("dy", ".71em")
             .attr("font-size", "10px")
+            .attr("font-family", "'Liberation Sans', Arial, Helvetica, sans-serif")
             .attr("letter-spacing", "3")
             .style("text-anchor", "end")
             .text(yAxisUnits === "NONE" ? "" : yAxisUnits);
