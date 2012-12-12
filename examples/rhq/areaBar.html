@@ -18,8 +18,9 @@
         }
 
         .grid .tick {
-            stroke: #fafafa;
-            stroke-opacity: .5;
+            stroke: #a7a7ac;
+            stroke-width: .5;
+            stroke-opacity: .3;
         }
 
         .y.axis  .tick.minor {
@@ -52,6 +53,10 @@
                 <linearGradient id="leaderBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" style="stop-color:#d3d3d6;stop-opacity:1"/>
                     <stop offset="100%" style="stop-color:#d3d3d6;stop-opacity:.3"/>
+                </linearGradient>
+                <linearGradient id="heavyLeaderBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#a7a7ac;stop-opacity:1"/>
+                    <stop offset="100%" style="stop-color:#a7a7ac;stop-opacity:.3"/>
                 </linearGradient>
                 <linearGradient id="topBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" style="stop-color:rgb(14,97,169);stop-opacity:1"/>
@@ -322,13 +327,7 @@ function draw(data) {
                 return  (width / data.length - barOffset  );
             })
 
-            .attr("opacity", function (d) {
-                if (d.down) {
-                    return .55;
-                } else {
-                    return .55;
-                }
-            })
+            .attr("opacity",".55")
             .attr("fill", function (d, i) {
                 if (d.down) {
                     return  "url(#redStripes)";
@@ -336,7 +335,7 @@ function draw(data) {
                     return  "url(#grayStripes)";
                 } else {
                     if (i % 5 == 0) {
-                        return  "#a7a7ac";
+                        return  "url(#heavyLeaderBarGrad)";
                     } else {
                         return  "url(#leaderBarGrad)";
                     }
@@ -461,8 +460,7 @@ function draw(data) {
                     return  "";
                 }
             })
-            .attr("fill", "#a7a7ac")
-            .attr("opacity", 1);
+            .attr("fill", "#a7a7ac");
 
 
     svg.selectAll("rect.high")
