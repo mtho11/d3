@@ -27,6 +27,7 @@
 
             stroke: #a7a7ac;
         }
+
         .y.axis  text {
             font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
             font-size: 10px;
@@ -168,13 +169,13 @@ var json3 = eval(
             { x: 1355261567991, high: 3.0, low: 3.0, y: 3.0},
             { x: 1355262287991, high: 4.0, low: 3.0, y: 3.5},
             { x: 1355263007991, high: 3.0, low: 3.0, y: 3.0},
-            { x: 1355263727991, high: 2.0, low: 2.0, y: 2.0, down:true},
-            { x: 1355264447991, high: 2.0, low: 2.0, y: 2.0, down:true},
-            { x: 1355265167991, high: 2.0, low: 2.0, y: 2.0, down:true},
+            { x: 1355263727991, high: 2.0, low: 2.0, y: 2.0, down: true},
+            { x: 1355264447991, high: 2.0, low: 2.0, y: 2.0, down: true},
+            { x: 1355265167991, high: 2.0, low: 2.0, y: 2.0, down: true},
             { x: 1355265887991, high: 4.0, low: 3.0, y: 3.5},
             { x: 1355266607991, high: 2.0, low: 2.0, y: 2.0},
-            { x: 1355267327991, high: 2.0, low: 2.0, y: 2.0, nodata:true},
-            { x: 1355268047991, high: 5.0, low: 5.0, y: 5.0, nodata:true}
+            { x: 1355267327991, high: 2.0, low: 2.0, y: 2.0, nodata: true},
+            { x: 1355268047991, high: 5.0, low: 5.0, y: 5.0, nodata: true}
         ]
 );
 function draw(data) {
@@ -183,6 +184,8 @@ function draw(data) {
     var margin = {top: 10, right: 5, bottom: 30, left: 40},
             width = 700 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom;
+
+    var titleHeight = 43, titleSpace = 10;
 
     var avg = d3.mean(data.map(function (d) {
         return d.y;
@@ -271,16 +274,28 @@ function draw(data) {
     // create the actual chart group
     var chart = d3.select(chartSelection);
 
-    var titleHeight = 43;
-    var titleSpace = 10;
-    // add the gradient background
-    var title = chart.append("g").append("rect")
-            .attr("class", "title")
-            .attr("x", margin.left)
-            .attr("y", margin.top)
-            .attr("height", titleHeight)
-            .attr("width", width + 10)
-            .attr("fill", "url(#headerGrad)");
+
+    var createHeader = (function (resourceName) {
+
+        // title/header
+        var title = chart.append("g").append("rect")
+                .attr("class", "title")
+                .attr("x", margin.left)
+                .attr("y", margin.top)
+                .attr("height", titleHeight)
+                .attr("width", width + 10)
+                .attr("fill", "url(#headerGrad)");
+
+        chart.append("text")
+                .attr("class", "titleName")
+                .attr("x", 60)
+                .attr("y", 37)
+                .attr("font-size", 18)
+                .attr("text-anchor", "left")
+                .text(resourceName)
+                .attr("fill", "#FFFFFF");
+    }("Resource Name - measure"));
+
 
     var svg = chart.append("g")
             .attr("width", width + margin.left + margin.right)
@@ -327,7 +342,7 @@ function draw(data) {
                 return  (width / data.length - barOffset  );
             })
 
-            .attr("opacity",".55")
+            .attr("opacity", ".55")
             .attr("fill", function (d, i) {
                 if (d.down) {
                     return  "url(#redStripes)";
@@ -353,7 +368,7 @@ function draw(data) {
             .attr("y", function (d) {
                 return  yScale(lowBound) + 2;
             })
-            .attr("height", function (d,i ) {
+            .attr("height", function (d, i) {
                 if (i % 5 == 0) {
                     return height - yScale(lowBound) + 4;
                 } else {
@@ -463,6 +478,7 @@ function draw(data) {
             .attr("fill", "#a7a7ac");
 
 
+    // upper portion representing avg to high
     svg.selectAll("rect.high")
             .data(data)
             .enter().append("rect")
@@ -488,6 +504,7 @@ function draw(data) {
             .attr("fill", "url(#topBarGrad)");
 
 
+    // lower portion representing avg to low
     svg.selectAll("rect.low")
             .data(data)
             .enter().append("rect")
