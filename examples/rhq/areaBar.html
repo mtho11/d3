@@ -275,7 +275,11 @@ function draw(data) {
     var chart = d3.select(chartSelection);
 
 
-    var createHeader = (function (resourceName) {
+    var createHeader = (function (resourceName,minLabel,minValue,avgLabel, avgValue, highLabel, highValue) {
+        var fontSize = 18,
+                yTitle = 37,
+                fgColor = "#FFFFFF";
+
 
         // title/header
         var title = chart.append("g").append("rect")
@@ -289,12 +293,72 @@ function draw(data) {
         chart.append("text")
                 .attr("class", "titleName")
                 .attr("x", 60)
-                .attr("y", 37)
-                .attr("font-size", 18)
+                .attr("y", yTitle)
+                .attr("font-size", fontSize)
                 .attr("text-anchor", "left")
                 .text(resourceName)
-                .attr("fill", "#FFFFFF");
-    }("Resource Name - measure"));
+                .attr("fill", fgColor);
+
+        var baseX = 360;
+        var xInc = 60;
+
+        chart.append("text")
+                .attr("class", "minLabel")
+                .attr("x", baseX)
+                .attr("y", yTitle)
+                .attr("font-size", fontSize)
+                .attr("text-anchor", "left")
+                .text(minLabel)
+                .attr("fill", fgColor);
+
+        chart.append("text")
+                .attr("class", "minText")
+                .attr("x", baseX + xInc)
+                .attr("y", yTitle)
+                .attr("font-size", fontSize)
+                .attr("text-anchor", "left")
+                .text(minValue.toPrecision(3))
+                .attr("fill", fgColor);
+
+        //avg
+        chart.append("text")
+                .attr("class", "avgLabel")
+                .attr("x", baseX + 2 * xInc)
+                .attr("y", yTitle)
+                .attr("font-size", fontSize)
+                .attr("text-anchor", "left")
+                .text(avgLabel)
+                .attr("fill", fgColor);
+
+        chart.append("text")
+                .attr("class", "avgText")
+                .attr("x", baseX +  3 * xInc)
+                .attr("y", yTitle)
+                .attr("font-size", fontSize)
+                .attr("text-anchor", "left")
+                .text(avgValue.toPrecision(3))
+                .attr("fill", fgColor);
+
+        // high
+        chart.append("text")
+                .attr("class", "highLabel")
+                .attr("x", baseX + 4 * xInc)
+                .attr("y", yTitle)
+                .attr("font-size", fontSize)
+                .attr("text-anchor", "left")
+                .text(highLabel)
+                .attr("fill", fgColor);
+
+        chart.append("text")
+                .attr("class", "highText")
+                .attr("x", baseX +  5 * xInc)
+                .attr("y", yTitle)
+                .attr("font-size", fontSize)
+                .attr("text-anchor", "left")
+                .text(highValue.toPrecision(3))
+                .attr("fill", fgColor);
+
+    }("Resource Name - measure", "Min -",min,"Avg -",avg,"High -",peak));
 
 
     var svg = chart.append("g")
