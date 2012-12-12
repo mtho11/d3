@@ -22,6 +22,10 @@
             stroke-opacity: .5;
         }
 
+        .y.axis  .tick.minor {
+
+            stroke: #a7a7ac;
+        }
         .y.axis  text {
             font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
             font-size: 10px;
@@ -255,14 +259,13 @@ function draw(data) {
                 return yScale(+d.low);
             });
 
-
     // create the actual chart group
     var chart = d3.select(chartSelection);
 
     var titleHeight = 43;
     var titleSpace = 10;
     // add the gradient background
-    chart.append("rect")
+    var title = chart.append("g").append("rect")
             .attr("class", "title")
             .attr("x", margin.left)
             .attr("y", margin.top)
