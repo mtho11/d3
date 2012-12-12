@@ -33,6 +33,9 @@
             font-style: normal;
             stroke: #50505a;
         }
+        .x.axis path {
+            stroke: #cccdcf;
+        }
 
         .y.axis path {
             display: none;
@@ -456,7 +459,7 @@ function draw(data) {
             .enter().append("rect")
             .attr("class", "customXAxisKnobs")
             .attr("x", function (d) {
-                return timeScale(d.x) + 5;
+                return timeScale(d.x) + 4;
             })
             .attr("y", function (d) {
                 return  yScale(lowBound) + 3;
@@ -469,7 +472,7 @@ function draw(data) {
                 }
             })
             .attr("width", function (d) {
-                return  (((width / data.length - barOffset) / 2) - 2 );
+                return  (((width / data.length - barOffset) / 2) - 3 );
             })
             .attr("opacity", 1)
             .attr("fill", function (d, i) {
@@ -486,7 +489,7 @@ function draw(data) {
             .enter().append("rect")
             .attr("class", "customXAxisKnobsSmall")
             .attr("x", function (d) {
-                return timeScale(d.x) + 6;
+                return timeScale(d.x) + 5;
             })
             .attr("y", function (d) {
                 return  yScale(lowBound) + 5;
@@ -499,7 +502,7 @@ function draw(data) {
                 }
             })
             .attr("width", function (d) {
-                return  (((width / data.length - barOffset) / 2) - 5);
+                return  (((width / data.length - barOffset) / 2) - 4);
             })
             .attr("opacity", 1)
             .attr("fill", function (d, i) {
@@ -608,7 +611,7 @@ function draw(data) {
             .attr("y", -35)
             .attr("dy", ".71em")
             .attr("font-size", "10px")
-            .attr("letter-spacing", "2")
+            .attr("letter-spacing", "3")
             .style("text-anchor", "end")
             .text(yAxisUnits === "NONE" ? "" : yAxisUnits);
 
@@ -650,7 +653,7 @@ function draw(data) {
 
     console.log("finished drawing paths");
 }
-draw(json3);
+draw(json);
 
 </script>
 </body>
