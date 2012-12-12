@@ -49,6 +49,10 @@
                     <stop offset="0%" style="stop-color:#707883;stop-opacity:1"/>
                     <stop offset="100%" style="stop-color:#425b64;stop-opacity:1"/>
                 </linearGradient>
+                <linearGradient id="leaderBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#d3d3d6;stop-opacity:1"/>
+                    <stop offset="100%" style="stop-color:#d3d3d6;stop-opacity:.3"/>
+                </linearGradient>
                 <linearGradient id="topBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" style="stop-color:rgb(14,97,169);stop-opacity:1"/>
                     <stop offset="100%" style="stop-color:rgb(66,170,223);stop-opacity:.8"/>
@@ -304,14 +308,14 @@ function draw(data) {
                 if (d.down || d.nodata) {
                     return yScale(highBound);
                 } else {
-                    return yScale(d.high);
+                    return yScale(d.low);
                 }
             })
             .attr("height", function (d) {
                 if (d.down || d.nodata) {
                     return height - yScale(highBound) - pixelsOffHeight;
                 } else {
-                    return height - yScale(d.high) - pixelsOffHeight;
+                    return height - yScale(d.low) - pixelsOffHeight;
                 }
             })
             .attr("width", function (d) {
@@ -334,7 +338,7 @@ function draw(data) {
                     if (i % 5 == 0) {
                         return  "#a7a7ac";
                     } else {
-                        return  "#d3d3d6";
+                        return  "url(#leaderBarGrad)";
                     }
                 }
             });
