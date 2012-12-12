@@ -33,9 +33,7 @@
             font-style: normal;
             stroke: #50505a;
         }
-        .x.axis path {
-            stroke: #cccdcf;
-        }
+
 
         .y.axis path {
             display: none;
@@ -214,11 +212,11 @@ function draw(data) {
             .rangeRound([height, 0])
             .domain([lowBound, highBound]);
 
-    var xAxis = d3.svg.axis()
-            .scale(timeScale)
-            .ticks(0)
-            .tickSize(0, 0, 0)
-            .orient("bottom");
+//    var xAxis = d3.svg.axis()
+//            .scale(timeScale)
+//            .ticks(0)
+//            .tickSize(0, 0, 0)
+//            .orient("bottom");
 
     var yAxis = d3.svg.axis()
             .scale(yScale)
@@ -251,27 +249,20 @@ function draw(data) {
                 return timeScale(d.x);
             })
             .y(function (d) {
-                return yScale((min));
+                return yScale(min);
             });
 
-
-    var highLine = d3.svg.line()
+    // our own x-axis because ours is custom
+    var xAxisLine = d3.svg.line()
             .interpolate(interpolation)
             .x(function (d) {
                 return timeScale(d.x);
             })
             .y(function (d) {
-                return yScale(+d.high);
+                return yScale(lowBound);
             });
 
-    var lowLine = d3.svg.line()
-            .interpolate(interpolation)
-            .x(function (d) {
-                return timeScale(d.x);
-            })
-            .y(function (d) {
-                return yScale(+d.low);
-            });
+
 
     // create the actual chart group
     var chart = d3.select(chartSelection);
@@ -596,10 +587,10 @@ function draw(data) {
             .attr("fill", "url(#bottomBarGrad)");
 
     // create x-axis
-    svg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+//    svg.append("g")
+//            .attr("class", "x axis")
+//            .attr("transform", "translate(0," + height + ")")
+//            .call(xAxis);
 
 
     // create y-axis
@@ -645,11 +636,21 @@ function draw(data) {
             .datum(data)
             .attr("class", "avgLine")
             .attr("fill", "none")
-            .attr("stroke", "b0d9b0")
+            .attr("stroke", "#b0d9b0")
             .attr("stroke-width", "1")
             .attr("stroke-dasharray", "3,3")
             .attr("stroke-opacity", ".6")
             .attr("d", avgLine);
+    // xaxis line
+    svg.append("path")
+            .datum(data)
+            .attr("class", "xAxisLine")
+            .attr("fill", "none")
+            .attr("stroke", "#cccdcf")
+            .attr("stroke-width", "1")
+            //.attr("stroke-dasharray", "3,3")
+            //.attr("stroke-opacity", ".6")
+            .attr("d", xAxisLine);
 
     console.log("finished drawing paths");
 }
