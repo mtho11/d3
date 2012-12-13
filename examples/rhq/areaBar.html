@@ -226,7 +226,7 @@ function draw(data) {
     "use strict";
 
     var margin = {top: 10, right: 5, bottom: 30, left: 40},
-            width = 700 - margin.left - margin.right,
+            width = 850 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom,
             titleHeight = 43, titleSpace = 10;
 
@@ -428,7 +428,7 @@ function draw(data) {
             );
 
 
-    var barOffset = 3, pixelsOffHeight = 0;
+    var barOffset = 2, pixelsOffHeight = 0;
 
     // The gray bars at the bottom leading up
     svg.selectAll("rect.leaderBar")
@@ -712,7 +712,7 @@ function draw(data) {
 
     console.log("finished drawing paths");
 }
-draw(jsonTest);
+draw(json60hour);
 
 </script>
 </body>
