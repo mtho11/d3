@@ -16,7 +16,8 @@
             stroke: #000;
             shape-rendering: crispEdges;
         }
-        /* Horizontal gridlines */
+
+            /* Horizontal gridlines */
         .grid .tick {
             stroke: #f7f7f7;
         }
@@ -29,11 +30,10 @@
         .y.axis  text {
             font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
             font-size: 10px;
-            font-weight: normal;
+            font-weight: lighter;
             font-style: normal;
             stroke: #50505a;
         }
-
 
         .y.axis path {
             display: none;
@@ -179,17 +179,92 @@ var json3 = eval(
             { x: 1355268047991, high: 5.0, low: 5.0, y: 5.0, nodata: true}
         ]
 );
-var jsonBad = eval([{ x:1355316747241, high:2.0, low:2.0, y:2.0},{ x:1355321787241, high:2.0, low:2.0, y:2.0},{ x:1355322507241, high:2.0, low:2.0, y:2.0},{ x:1355323227241, high:2.0, low:2.0, y:2.0},{ x:1355323947241, high:2.0, low:2.0, y:2.0},{ x:1355324667241, high:2.0, low:1.0, y:1.5},{ x:1355325387241, high:19.0, low:19.0, y:19.0},{ x:1355326107241, high:2.0, low:2.0, y:2.0},{ x:1355326827241, high:2.0, low:2.0, y:2.0},{ x:1355327547241, high:2.0, low:2.0, y:2.0},{ x:1355328267241, high:2.0, low:1.0, y:1.5},{ x:1355328987241, high:2.0, low:2.0, y:2.0},{ x:1355329707241, high:2.0, low:2.0, y:2.0},{ x:1355330427241, high:2.0, low:2.0, y:2.0},{ x:1355331147241, high:2.0, low:2.0, y:2.0},{ x:1355331867241, high:2.0, low:2.0, y:2.0},{ x:1355332587241, high:2.0, low:2.0, y:2.0},{ x:1355333307241, high:2.0, low:2.0, y:2.0},{ x:1355334027241, high:3.0, low:3.0, y:3.0},{ x:1355334747241, high:2.0, low:2.0, y:2.0},{ x:1355335467241, high:2.0, low:2.0, y:2.0},{ x:1355336187241, high:2.0, low:2.0, y:2.0},{ x:1355336907241, high:2.0, low:2.0, y:2.0},{ x:1355337627241, high:2.0, low:2.0, y:2.0},{ x:1355338347241, high:3.0, low:3.0, y:3.0},{ x:1355339067241, high:1.0, low:1.0, y:1.0},{ x:1355339787241, high:2.0, low:2.0, y:2.0},{ x:1355340507241, high:2.0, low:2.0, y:2.0},{ x:1355341227241, high:2.0, low:2.0, y:2.0},{ x:1355341947241, high:2.0, low:2.0, y:2.0},{ x:1355342667241, high:2.0, low:2.0, y:2.0},{ x:1355343387241, high:2.0, low:2.0, y:2.0},{ x:1355344107241, high:2.0, low:2.0, y:2.0},{ x:1355344827241, high:1.0, low:1.0, y:1.0},{ x:1355345547241, high:2.0, low:2.0, y:2.0},{ x:1355346267241, high:2.0, low:2.0, y:2.0},{ x:1355346987241, high:2.0, low:2.0, y:2.0},{ x:1355347707241, high:2.0, low:2.0, y:2.0},{ x:1355348427241, high:2.0, low:2.0, y:2.0},{ x:1355349147241, high:2.0, low:2.0, y:2.0},{ x:1355349867241, high:2.0, low:2.0, y:2.0},{ x:1355350587241, high:2.0, low:2.0, y:2.0},{ x:1355351307241, high:3.0, low:3.0, y:3.0}]);
-var json60 = eval([{ x:1355253921123, high:0.050046292820859296, low:0.050046292820859296, y:0.050046292820859296},{ x:1355256801123, high:0.0, low:0.0, y:0.0},{ x:1355259681123, high:0.09999616681360547, low:0.0, y:0.03333205560453516},{ x:1355262561123, high:0.09999883334694429, low:0.0, y:0.049999416673472144},{ x:1355265441123, high:0.09999150072243859, low:0.0, y:0.049995750361219296},{ x:1355268321123, high:0.09999766672110984, low:0.0, y:0.03333255557370328},{ x:1355271201123, high:0.0, low:0.0, y:0.0},{ x:1355274081123, high:0.1000030834284057, low:0.0, y:0.0333343611428019},{ x:1355276961123, high:0.100000250000625, low:0.0, y:0.0500001250003125},{ x:1355279841123, high:0.0, low:0.0, y:0.0},{ x:1355285601123, high:0.018764809539528776, low:0.0, y:0.009382404769764388},{ x:1355320161123, high:0.0, low:0.0, y:0.0},{ x:1355323041123, high:0.1, low:0.0, y:0.03333333333333333},{ x:1355325921123, high:0.1, low:0.0, y:0.05},{ x:1355328801123, high:0.0, low:0.0, y:0.0},{ x:1355331681123, high:0.0999999166667361, low:0.0, y:0.0333333055555787},{ x:1355334561123, high:0.1, low:0.0, y:0.05},{ x:1355337441123, high:0.10000008333340278, low:0.0, y:0.03333336111113426},{ x:1355340321123, high:0.05000004166670139, low:0.0, y:0.025000020833350695},{ x:1355343201123, high:0.0999999166667361, low:0.0, y:0.04999995833336805},{ x:1355346081123, high:0.0999999166667361, low:0.0, y:0.0333333055555787},{ x:1355348961123, high:0.0, low:0.0, y:0.0},{ x:1355351841123, high:0.1, low:0.0, y:0.03333333333333333},{ x:1355354721123, high:0.1, low:0.0, y:0.05},{ x:1355357601123, high:0.10000008333340278, low:0.0, y:0.05000004166670139},{ x:1355360481123, high:0.1, low:0.0, y:0.03333333333333333},{ x:1355363361123, high:0.0, low:0.0, y:0.0},{ x:1355366241123, high:0.1, low:0.0, y:0.03333333333333333},{ x:1355369121123, high:0.1, low:0.1, y:0.1},{ x:1355406561123, high:0.0, low:0.0, y:0.0},{ x:1355409441123, high:0.1, low:0.0, y:0.05}]);
+var jsonBad = eval([
+    { x: 1355316747241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355321787241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355322507241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355323227241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355323947241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355324667241, high: 2.0, low: 1.0, y: 1.5},
+    { x: 1355325387241, high: 19.0, low: 19.0, y: 19.0},
+    { x: 1355326107241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355326827241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355327547241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355328267241, high: 2.0, low: 1.0, y: 1.5},
+    { x: 1355328987241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355329707241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355330427241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355331147241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355331867241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355332587241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355333307241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355334027241, high: 3.0, low: 3.0, y: 3.0},
+    { x: 1355334747241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355335467241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355336187241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355336907241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355337627241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355338347241, high: 3.0, low: 3.0, y: 3.0},
+    { x: 1355339067241, high: 1.0, low: 1.0, y: 1.0},
+    { x: 1355339787241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355340507241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355341227241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355341947241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355342667241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355343387241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355344107241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355344827241, high: 1.0, low: 1.0, y: 1.0},
+    { x: 1355345547241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355346267241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355346987241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355347707241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355348427241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355349147241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355349867241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355350587241, high: 2.0, low: 2.0, y: 2.0},
+    { x: 1355351307241, high: 3.0, low: 3.0, y: 3.0}
+]);
+var json60 = eval([
+    { x: 1355253921123, high: 0.050046292820859296, low: 0.050046292820859296, y: 0.050046292820859296},
+    { x: 1355256801123, high: 0.0, low: 0.0, y: 0.0},
+    { x: 1355259681123, high: 0.09999616681360547, low: 0.0, y: 0.03333205560453516},
+    { x: 1355262561123, high: 0.09999883334694429, low: 0.0, y: 0.049999416673472144},
+    { x: 1355265441123, high: 0.09999150072243859, low: 0.0, y: 0.049995750361219296},
+    { x: 1355268321123, high: 0.09999766672110984, low: 0.0, y: 0.03333255557370328},
+    { x: 1355271201123, high: 0.0, low: 0.0, y: 0.0},
+    { x: 1355274081123, high: 0.1000030834284057, low: 0.0, y: 0.0333343611428019},
+    { x: 1355276961123, high: 0.100000250000625, low: 0.0, y: 0.0500001250003125},
+    { x: 1355279841123, high: 0.0, low: 0.0, y: 0.0},
+    { x: 1355285601123, high: 0.018764809539528776, low: 0.0, y: 0.009382404769764388},
+    { x: 1355320161123, high: 0.0, low: 0.0, y: 0.0},
+    { x: 1355323041123, high: 0.1, low: 0.0, y: 0.03333333333333333},
+    { x: 1355325921123, high: 0.1, low: 0.0, y: 0.05},
+    { x: 1355328801123, high: 0.0, low: 0.0, y: 0.0},
+    { x: 1355331681123, high: 0.0999999166667361, low: 0.0, y: 0.0333333055555787},
+    { x: 1355334561123, high: 0.1, low: 0.0, y: 0.05},
+    { x: 1355337441123, high: 0.10000008333340278, low: 0.0, y: 0.03333336111113426},
+    { x: 1355340321123, high: 0.05000004166670139, low: 0.0, y: 0.025000020833350695},
+    { x: 1355343201123, high: 0.0999999166667361, low: 0.0, y: 0.04999995833336805},
+    { x: 1355346081123, high: 0.0999999166667361, low: 0.0, y: 0.0333333055555787},
+    { x: 1355348961123, high: 0.0, low: 0.0, y: 0.0},
+    { x: 1355351841123, high: 0.1, low: 0.0, y: 0.03333333333333333},
+    { x: 1355354721123, high: 0.1, low: 0.0, y: 0.05},
+    { x: 1355357601123, high: 0.10000008333340278, low: 0.0, y: 0.05000004166670139},
+    { x: 1355360481123, high: 0.1, low: 0.0, y: 0.03333333333333333},
+    { x: 1355363361123, high: 0.0, low: 0.0, y: 0.0},
+    { x: 1355366241123, high: 0.1, low: 0.0, y: 0.03333333333333333},
+    { x: 1355369121123, high: 0.1, low: 0.1, y: 0.1},
+    { x: 1355406561123, high: 0.0, low: 0.0, y: 0.0},
+    { x: 1355409441123, high: 0.1, low: 0.0, y: 0.05}
+]);
 
 function draw(data) {
     "use strict";
 
     var margin = {top: 10, right: 5, bottom: 30, left: 40},
             width = 700 - margin.left - margin.right,
-            height = 250 - margin.top - margin.bottom;
-
-    var titleHeight = 43, titleSpace = 10;
+            height = 250 - margin.top - margin.bottom,
+            titleHeight = 43, titleSpace = 10;
 
     var avg = d3.mean(data.map(function (d) {
         return d.y;
@@ -267,17 +342,16 @@ function draw(data) {
             });
 
 
-
     // create the actual chart group
     var chart = d3.select(chartSelection);
 
 
-    var createHeader = (function (resourceName,minLabel,minValue,avgLabel, avgValue, highLabel, highValue) {
+    var createHeader = (function (resourceName, minLabel, minValue, avgLabel, avgValue, highLabel, highValue) {
         var fontSize = 14,
-            yTitle = 37,
-            fgColor = "#FFFFFF",
-            baseX = 440,
-            xInc = 50;
+                yTitle = 37,
+                fgColor = "#FFFFFF",
+                baseX = 440,
+                xInc = 50;
 
 
         // title/header
@@ -332,7 +406,7 @@ function draw(data) {
 
         chart.append("text")
                 .attr("class", "avgText")
-                .attr("x", baseX +  3 * xInc)
+                .attr("x", baseX + 3 * xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
                 .attr("text-anchor", "left")
@@ -352,7 +426,7 @@ function draw(data) {
 
         chart.append("text")
                 .attr("class", "highText")
-                .attr("x", baseX +  5 * xInc)
+                .attr("x", baseX + 5 * xInc)
                 .attr("y", yTitle)
                 .attr("font-size", fontSize)
                 .attr("text-anchor", "left")
@@ -360,7 +434,7 @@ function draw(data) {
                 .attr("fill", fgColor);
 
     });
-    createHeader(resourceName, "Min -",min,"Avg -",avg,"High -",peak);
+    createHeader(resourceName, "Min -", min, "Avg -", avg, "High -", peak);
 
 
     var svg = chart.append("g")
@@ -609,7 +683,7 @@ function draw(data) {
             .append("text")
             .attr("transform", "rotate(-90),translate( -60,0)")
             .attr("y", -30)
-            //.attr("dy", ".71em")
+        //.attr("dy", ".71em")
             .attr("font-size", "10px")
             .attr("font-family", "'Liberation Sans', Arial, Helvetica, sans-serif")
             .attr("letter-spacing", "3")
@@ -658,8 +732,8 @@ function draw(data) {
             .attr("fill", "none")
             .attr("stroke", "#cccdcf")
             .attr("stroke-width", "1")
-            //.attr("stroke-dasharray", "3,3")
-            //.attr("stroke-opacity", ".6")
+        //.attr("stroke-dasharray", "3,3")
+        //.attr("stroke-opacity", ".6")
             .attr("d", xAxisLine);
 
     console.log("finished drawing paths");
