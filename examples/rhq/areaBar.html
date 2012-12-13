@@ -551,7 +551,7 @@ function draw(data) {
                 } else if (d.nodata) {
                     return  "url(#grayStripes)";
                 } else {
-                    if (i % 5 == 0) {
+                    if (i % 10 == 0) {
                         return  "url(#heavyLeaderBarGrad)";
                     } else {
                         return  "url(#leaderBarGrad)";
@@ -571,7 +571,7 @@ function draw(data) {
                 return  yScale(lowBound) + 2;
             })
             .attr("height", function (d, i) {
-                if (i % 5 == 0) {
+                if (i % 10 == 0) {
                     return height - yScale(lowBound) + 3;
                 } else {
                     return height - yScale(lowBound) + 3;
@@ -582,7 +582,7 @@ function draw(data) {
             })
             .attr("opacity", 1)
             .attr("fill", function (d, i) {
-                if (i % 5 == 0) {
+                if (i % 10 == 0) {
                     return  "#a7a7ac";
                 } else {
                     return  "#d3d3d6";
@@ -601,7 +601,7 @@ function draw(data) {
                 return  yScale(lowBound) + 3;
             })
             .attr("height", function (d, i) {
-                if (i % 5 == 0) {
+                if (i % 10 == 0) {
                     return (height - yScale(lowBound)) + 4;
                 } else {
                     return 0;
@@ -613,7 +613,7 @@ function draw(data) {
             .attr("opacity", 1)
             .attr("fill", function (d, i) {
 
-                if (i % 5 == 0) {
+                if (i % 10 == 0) {
                     return  "#a7a7ac";
                 } else {
                     return  "#d3d3d6";
@@ -631,7 +631,7 @@ function draw(data) {
                 return  yScale(lowBound) + 5;
             })
             .attr("height", function (d, i) {
-                if (i % 5 != 0) {
+                if (i % 10 != 0) {
                     return (height - yScale(lowBound)) + 2;
                 } else {
                     return 0;
@@ -643,7 +643,7 @@ function draw(data) {
             .attr("opacity", 1)
             .attr("fill", function (d, i) {
 
-                if (i % 5 == 0) {
+                if (i % 10 == 0) {
                     return  "#a7a7ac";
                 } else {
                     return  "#d3d3d6";
@@ -671,7 +671,7 @@ function draw(data) {
             .attr("text-anchor", "left").
             text(function (d, i) {
                 var date = new Date(+d.x);
-                if (i % 5 == 0) {
+                if (i % 10 == 0) {
                     return dateFormatter(date);
                 } else {
                     return  "";
