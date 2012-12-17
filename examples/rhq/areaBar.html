@@ -324,7 +324,7 @@ function draw(data) {
         var fontSize = 14,
                 yTitle = 37,
                 fgColor = "#FFFFFF",
-                baseX = 440,
+                baseX = 490,
                 xInc = 50;
 
 
@@ -408,7 +408,7 @@ function draw(data) {
                 .attr("fill", fgColor);
 
     });
-    createHeader(resourceName, "Min -", min, "Avg -", avg, "High -", peak);
+    createHeader(yAxisLabel, "Min -", min, "Avg -", avg, "High -", peak);
 
 
     var svg = chart.append("g")
@@ -709,6 +709,40 @@ function draw(data) {
         //.attr("stroke-dasharray", "3,3")
         //.attr("stroke-opacity", ".6")
             .attr("d", xAxisLine);
+
+//    svg.selectAll("circle.marker")
+//            .on("mouseover", function (d) {
+//                d3.select(this)
+//                        .transition()
+//                        .attr("r",5);
+//            });
+//    svg.selectAll("circle.marker")
+//            .on("mouseout", function (d) {
+//                d3.select(this)
+//                        .transition()
+//                        .attr("r",radius);
+//            });
+
+//    svg.selectAll("circle.marker")
+//            .on("mouseover", function (d) {
+//                d3.select("text#" + d.x).remove();
+//                d3.select(chartHandle)
+//                        .append("text")
+//                        .text("Value: " + d.y)
+//                        .attr("x", timeScale(d.x) + 10)
+//                        .attr("y", yScale(d.y) - 10)
+//                        .attr("id", d.x);
+//            });
+//
+//    svg.selectAll("circle.marker")
+//            .on("mouseout", function (d) {
+//                d3.select("text#" + d.x)
+//                        .transition()
+//                        .duration(500)
+//                        .style("opacity", 0)
+//                        .style("transform", "translate(10, -10)")
+//                        .remove();
+//            });
 
     console.log("finished drawing paths");
 }
