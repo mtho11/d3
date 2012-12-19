@@ -81,7 +81,7 @@
                 </pattern>
                 <pattern id="redStripes" patternUnits="userSpaceOnUse" x="0" y="0"
                          width="6" height="3">
-                    <path d="M 0 0 6 0" style="stroke:red; fill:none;"/>
+                    <path d="M 0 0 6 0" style="stroke:#ff8a9a; fill:none;"/>
                 </pattern>
             </defs>
         </svg>
@@ -608,7 +608,7 @@ function draw(data) {
                 return timeScale(d.x);
             })
             .attr("y", function (d) {
-                return isNaN(d.high) ? height  : yScale(d.high);
+                return isNaN(d.high) ? yScale(lowBound)  : yScale(d.high);
             })
             .attr("height", function (d) {
                 if (d.down || d.nodata) {
@@ -634,7 +634,7 @@ function draw(data) {
                 return timeScale(d.x);
             })
             .attr("y", function (d) {
-                return isNaN(d.y) ? height : d.y;
+                return isNaN(d.y) ? height : yScale(d.y);
             })
             .attr("height", function (d) {
                 if (d.down || d.nodata) {
@@ -725,14 +725,18 @@ function draw(data) {
         html: true,
         title: function() {
             var d = this.__data__ ;
-            var date = new Date(d.x);
+            var xValue = (d.x == undefined) ? 0 : +d.x;
+            var date = new Date(+xValue);
             var timeFormatter = d3.time.format("%I:%M:%S %P");
             var dateFormatter = d3.time.format("%m/%d/%y");
+            var highValue = (d.high == undefined) ? 0 : d.high.toFixed(2);
+            var lowValue = (d.low == undefined) ? 0 : d.low.toFixed(2);
+            var avgValue = (d.y == undefined) ? 0 : d.y.toFixed(2);
             return '<div style="text-align: left;"><span style="width:50px;font-weight: bold;color:#d3d3d6";">Time:  </span>' +timeFormatter(date)+ '</div>'+
                    '<div style="text-align: left;"><span style="width:50px;font-weight: bold;color:#d3d3d6"";">Date:  </span>' +dateFormatter(date)+ '</div>'+
                     '<div style="text-align: left;"><span style="width:50px;font-weight: bold;color:#ff8a9a";">High:  </span>'
-                    + d.high.toPrecision(3)+'</div><div style="text-align: left;"><span style="width:50px;font-weight: bold;color: #b0d9b0";">Avg:  </span>'+ d.y.toPrecision(3)+
-                    '</div><div style="text-align: left;"><span style="width:50px;font-weight: bold;color:#8ad6ff";">Low:  </span>'+ d.low.toPrecision(3)+ '</div>';
+                    + highValue +'</div><div style="text-align: left;"><span style="width:50px;font-weight: bold;color: #b0d9b0";">Avg:  </span>'+ avgValue+
+                    '</div><div style="text-align: left;"><span style="width:50px;font-weight: bold;color:#8ad6ff";">Low:  </span>'+ lowValue + '</div>';
         }
     });
 
