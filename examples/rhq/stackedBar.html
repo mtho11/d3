@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New RHQ d3 Bar/Area Chart Tester</title>
+    <title>New RHQ d3 Stacked Bar Chart Tester</title>
     <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="jquery.tipsy.js"></script>
     <link rel="stylesheet" href="tipsy.css" type="text/css" />
     <style>
@@ -38,18 +38,21 @@
             stroke: #50505a;
         }
 
+        .x.axis path {
+            stroke: #cccdcf;
+        }
         .y.axis path {
             display: none;
         }
     </style>
-    <script type='text/javascript'>
-        $(function() {
-            $('a[rel=tipsy]').tipsy({fade: true, gravity: 'n'});
-        });
-    </script>
+    <!--<script type='text/javascript'>-->
+        <!--$(function() {-->
+            <!--$('a[rel=tipsy]').tipsy({fade: true, gravity: 'n'});-->
+        <!--});-->
+    <!--</script>-->
 </head>
 <body>
-<span>New Area/Bar Chart Tester</span>
+<span>New Stacked Bar Chart Tester</span>
 
 <div>
     <div id="rChart-myChart" style="height: 320px;">
@@ -272,11 +275,11 @@ function draw(data) {
             .rangeRound([height, 0])
             .domain([lowBound, highBound]);
 
-//    var xAxis = d3.svg.axis()
-//            .scale(timeScale)
-//            .ticks(0)
-//            .tickSize(0, 0, 0)
-//            .orient("bottom");
+    var xAxis = d3.svg.axis()
+            .scale(timeScale)
+            .ticks(10)
+            .tickSize(0, 0, 0)
+            .orient("bottom");
 
     var yAxis = d3.svg.axis()
             .scale(yScale)
@@ -479,124 +482,124 @@ function draw(data) {
             });
 
     // custom x-axis
-    svg.selectAll("rect.customXAxis")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "customXAxis")
-            .attr("x", function (d) {
-                return timeScale(d.x);
-            })
-            .attr("y", function (d) {
-                return  yScale(lowBound) + 2;
-            })
-            .attr("height", function (d, i) {
-                if (i % 10 == 0) {
-                    return height - yScale(lowBound) + 3;
-                } else {
-                    return height - yScale(lowBound) + 3;
-                }
-            })
-            .attr("width", function (d) {
-                return  (width / data.length - barOffset  );
-            })
-            .attr("opacity", 1)
-            .attr("fill", function (d, i) {
-                if (i % 10 == 0) {
-                    return  "#a7a7ac";
-                } else {
-                    return  "#d3d3d6";
-                }
-            });
-
-    // Custom knobs on xaxis every 5th one
-    svg.selectAll("rect.customXAxisKnobs")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "customXAxisKnobs")
-            .attr("x", function (d) {
-                return timeScale(d.x) + 4;
-            })
-            .attr("y", function (d) {
-                return  yScale(lowBound) + 3;
-            })
-            .attr("height", function (d, i) {
-                if (i % 10 == 0) {
-                    return (height - yScale(lowBound)) + 4;
-                } else {
-                    return 0;
-                }
-            })
-            .attr("width", function (d) {
-                return  (((width / data.length - barOffset) / 2) - 3 );
-            })
-            .attr("opacity", 1)
-            .attr("fill", function (d, i) {
-
-                if (i % 10 == 0) {
-                    return  "#a7a7ac";
-                } else {
-                    return  "#d3d3d6";
-                }
-            });
-    // Custom knobs on
-    svg.selectAll("rect.customXAxisKnobsSmall")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "customXAxisKnobsSmall")
-            .attr("x", function (d) {
-                return timeScale(d.x) + 5;
-            })
-            .attr("y", function (d) {
-                return  yScale(lowBound) + 5;
-            })
-            .attr("height", function (d, i) {
-                if (i % 10 != 0) {
-                    return (height - yScale(lowBound)) + 2;
-                } else {
-                    return 0;
-                }
-            })
-            .attr("width", function (d) {
-                return  (((width / data.length - barOffset) / 2) - 4);
-            })
-            .attr("opacity", 1)
-            .attr("fill", function (d, i) {
-
-                if (i % 10 == 0) {
-                    return  "#a7a7ac";
-                } else {
-                    return  "#d3d3d6";
-                }
-            });
-
-
-    var dateFormatter = d3.time.format("%I:%M:%S %P");
-
-    // the labels for x axis
-    svg.selectAll("rect.customXAxisLabel")
-            .data(data)
-            .enter().append("text")
-            .attr("class", "customXAxisLabel")
-            .attr("x", function (d) {
-                return timeScale(d.x);
-            })
-            .attr("y", function (d) {
-                return  yScale(lowBound) + 10;
-            })
-            .attr("dy", "1.2em")
-            .attr("dx", function (d) {
-                return  (((width / data.length - barOffset) / 2) - 2 );
-            })
-            .attr("text-anchor", "left").
-            text(function (d, i) {
-                var date = new Date(+d.x);
-                if (i % 10 == 0) {
-                    return dateFormatter(date);
-                } else {
-                    return  "";
-                }
-            })
-            .attr("fill", "#50505a");
+//    svg.selectAll("rect.customXAxis")
+//            .data(data)
+//            .enter().append("rect")
+//            .attr("class", "customXAxis")
+//            .attr("x", function (d) {
+//                return timeScale(d.x);
+//            })
+//            .attr("y", function (d) {
+//                return  yScale(lowBound) + 2;
+//            })
+//            .attr("height", function (d, i) {
+//                if (i % 10 == 0) {
+//                    return height - yScale(lowBound) + 3;
+//                } else {
+//                    return height - yScale(lowBound) + 3;
+//                }
+//            })
+//            .attr("width", function (d) {
+//                return  (width / data.length - barOffset  );
+//            })
+//            .attr("opacity", 1)
+//            .attr("fill", function (d, i) {
+//                if (i % 10 == 0) {
+//                    return  "#a7a7ac";
+//                } else {
+//                    return  "#d3d3d6";
+//                }
+//            });
+//
+//    // Custom knobs on xaxis every 5th one
+//    svg.selectAll("rect.customXAxisKnobs")
+//            .data(data)
+//            .enter().append("rect")
+//            .attr("class", "customXAxisKnobs")
+//            .attr("x", function (d) {
+//                return timeScale(d.x) + 4;
+//            })
+//            .attr("y", function (d) {
+//                return  yScale(lowBound) + 3;
+//            })
+//            .attr("height", function (d, i) {
+//                if (i % 10 == 0) {
+//                    return (height - yScale(lowBound)) + 4;
+//                } else {
+//                    return 0;
+//                }
+//            })
+//            .attr("width", function (d) {
+//                return  (((width / data.length - barOffset) / 2) - 3 );
+//            })
+//            .attr("opacity", 1)
+//            .attr("fill", function (d, i) {
+//
+//                if (i % 10 == 0) {
+//                    return  "#a7a7ac";
+//                } else {
+//                    return  "#d3d3d6";
+//                }
+//            });
+//    // Custom knobs on
+//    svg.selectAll("rect.customXAxisKnobsSmall")
+//            .data(data)
+//            .enter().append("rect")
+//            .attr("class", "customXAxisKnobsSmall")
+//            .attr("x", function (d) {
+//                return timeScale(d.x) + 5;
+//            })
+//            .attr("y", function (d) {
+//                return  yScale(lowBound) + 5;
+//            })
+//            .attr("height", function (d, i) {
+//                if (i % 10 != 0) {
+//                    return (height - yScale(lowBound)) + 2;
+//                } else {
+//                    return 0;
+//                }
+//            })
+//            .attr("width", function (d) {
+//                return  (((width / data.length - barOffset) / 2) - 4);
+//            })
+//            .attr("opacity", 1)
+//            .attr("fill", function (d, i) {
+//
+//                if (i % 10 == 0) {
+//                    return  "#a7a7ac";
+//                } else {
+//                    return  "#d3d3d6";
+//                }
+//            });
+//
+//
+//    var dateFormatter = d3.time.format("%I:%M:%S %P");
+//
+//    // the labels for x axis
+//    svg.selectAll("rect.customXAxisLabel")
+//            .data(data)
+//            .enter().append("text")
+//            .attr("class", "customXAxisLabel")
+//            .attr("x", function (d) {
+//                return timeScale(d.x);
+//            })
+//            .attr("y", function (d) {
+//                return  yScale(lowBound) + 10;
+//            })
+//            .attr("dy", "1.2em")
+//            .attr("dx", function (d) {
+//                return  (((width / data.length - barOffset) / 2) - 2 );
+//            })
+//            .attr("text-anchor", "left").
+//            text(function (d, i) {
+//                var date = new Date(+d.x);
+//                if (i % 10 == 0) {
+//                    return dateFormatter(date);
+//                } else {
+//                    return  "";
+//                }
+//            })
+//            .attr("fill", "#50505a");
 
 
     // upper portion representing avg to high
@@ -651,10 +654,10 @@ function draw(data) {
             .attr("fill", "url(#bottomBarGrad)");
 
     // create x-axis
-//    svg.append("g")
-//            .attr("class", "x axis")
-//            .attr("transform", "translate(0," + height + ")")
-//            .call(xAxis);
+    svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
 
 
     // create y-axis
@@ -716,8 +719,6 @@ function draw(data) {
         //.attr("stroke-dasharray", "3,3")
         //.attr("stroke-opacity", ".6")
             .attr("d", xAxisLine);
-
-
 
 
     $('svg rect').tipsy({
